@@ -1,0 +1,19 @@
+# AstralForgeAE — Render Blueprint
+# Dashboard: New → Blueprint → select this repo
+# Or: New → Static Site → Root Directory . → Publish Directory .
+services:
+  - type: web
+    name: astralforge-web
+    runtime: static
+    plan: free
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=604800
