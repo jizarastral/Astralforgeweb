@@ -1,7 +1,7 @@
 {
   "name": "astralforge-web",
   "version": "1.0.0",
-  "description": "AstralForgeAE — modern landing page for glass fabrication & shop drawings consulting (UAE)",
+  "description": "AstralForgeAE — shop drawings, glass fabrication, HVAC up to G+20, 3D printing & custom solutions (UAE)",
   "private": true,
   "scripts": {
     "start": "npx --yes serve -s . -l ${PORT:-3000}",
