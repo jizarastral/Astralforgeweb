@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AstralForge">
+  <defs>
+    <linearGradient id="stroke" x1="14" y1="12" x2="50" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#9af5ff"/>
+      <stop offset="100%" stop-color="#6b7cff"/>
+    </linearGradient>
+    <linearGradient id="fill" x1="20" y1="14" x2="46" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5ee7ff"/>
+      <stop offset="100%" stop-color="#7c8cff"/>
+    </linearGradient>
+  </defs>
+  <!-- Soft tile -->
+  <rect width="64" height="64" rx="16" fill="#050814"/>
+  <!-- Minimal AF monogram (filled, McD-level clarity) -->
+  <g fill="url(#fill)">
+    <!-- A left leg -->
+    <polygon points="14,48 22,48 30,18 26,18"/>
+    <!-- A right leg + shared spine into F -->
+    <polygon points="26,18 30,18 38,48 34,48"/>
+    <!-- A crossbar -->
+    <rect x="21" y="34" width="14" height="3.6" rx="0.6"/>
+    <!-- F top arm -->
+    <rect x="30" y="18" width="20" height="3.8" rx="0.6"/>
+    <!-- F mid arm -->
+    <rect x="30" y="31.5" width="14" height="3.6" rx="0.6"/>
+    <!-- F stem (overlaps A peak cleanly) -->
+    <rect x="30" y="18" width="3.8" height="30" rx="0.6"/>
+  </g>
+  <!-- Hairline luxury outline -->
+  <g fill="none" stroke="url(#stroke)" stroke-width="0.9" opacity="0.55">
+    <polygon points="14,48 22,48 30,18 26,18"/>
+    <polygon points="26,18 30,18 38,48 34,48"/>
+  </g>
+  <!-- Micro star spark — astral mark -->
+  <circle cx="30" cy="26" r="1.6" fill="#eafcff"/>
+  <path d="M30 22.5 V29.5 M26.5 26 H33.5" stroke="#eafcff" stroke-width="0.7" stroke-linecap="round"/>
+</svg>

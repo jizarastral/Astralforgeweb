@@ -250,9 +250,10 @@ button {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  object-fit: cover;
-  border: 1px solid var(--border-strong);
-  box-shadow: 0 0 24px rgba(94, 231, 255, 0.2);
+  object-fit: contain;
+  background: #050814;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 20px rgba(94, 231, 255, 0.18);
 }
 
 .brand-text {
@@ -891,13 +892,21 @@ button {
 }
 
 .about-logo {
-  width: 120px;
-  height: 120px;
+  width: 128px;
+  height: 128px;
   border-radius: 28px;
   margin: 0 auto 24px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #050814;
   border: 1px solid var(--border-strong);
-  box-shadow: 0 0 40px rgba(94, 231, 255, 0.25);
+  box-shadow: 0 0 48px rgba(94, 231, 255, 0.28);
+}
+
+.footer-logo {
+  border-radius: 10px;
+  object-fit: contain;
+  background: #050814;
+  border: 1px solid var(--border);
 }
 
 .about-meta {
@@ -1080,8 +1089,7 @@ button {
 }
 
 .footer-brand img {
-  border-radius: 10px;
-  border: 1px solid var(--border);
+  display: block;
 }
 
 .footer-brand strong {
