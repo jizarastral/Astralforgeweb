@@ -250,7 +250,7 @@ button {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  object-fit: contain;
+  object-fit: cover;
   background: #050814;
   border: 1px solid var(--border);
   box-shadow: 0 0 20px rgba(94, 231, 255, 0.18);
@@ -896,7 +896,7 @@ button {
   height: 128px;
   border-radius: 28px;
   margin: 0 auto 24px;
-  object-fit: contain;
+  object-fit: cover;
   background: #050814;
   border: 1px solid var(--border-strong);
   box-shadow: 0 0 48px rgba(94, 231, 255, 0.28);
@@ -904,7 +904,7 @@ button {
 
 .footer-logo {
   border-radius: 10px;
-  object-fit: contain;
+  object-fit: cover;
   background: #050814;
   border: 1px solid var(--border);
 }
