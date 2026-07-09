@@ -165,7 +165,7 @@
           `Quote request: ${val("service")} — ${val("name")}`
         );
         const body = encodeURIComponent(message);
-        window.location.href = `mailto:info@astralforgeae.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:astralfconsulting@gmail.com?subject=${subject}&body=${body}`;
       } else {
         const text = encodeURIComponent(message);
         window.open(`https://wa.me/971505804276?text=${text}`, "_blank", "noopener,noreferrer");

@@ -8,11 +8,11 @@ Modern multi-page site for **AstralForgeAE** — shop drawings, advanced glass f
 
 | Role | Contact | Link |
 |------|---------|------|
-| Email | info@astralforgeae.com | [mailto:info@astralforgeae.com](mailto:info@astralforgeae.com) |
+| Email | astralfconsulting@gmail.com | [mailto:astralfconsulting@gmail.com](mailto:astralfconsulting@gmail.com) |
 | Projects / WhatsApp | +971 50 580 4276 | [wa.me/971505804276](https://wa.me/971505804276) |
 | Technical Support | +971 50 836 4246 | [wa.me/971508364246](https://wa.me/971508364246) |
 
-> **Note:** Update `info@astralforgeae.com` in `index.html` and `quote.html` if you use a different mailbox (e.g. Gmail now, custom domain later).
+> **Note:** Update `astralfconsulting@gmail.com` in `index.html` and `quote.html` if you use a different mailbox (e.g. Gmail now, custom domain later).
 
 ## Pages
 
@@ -103,7 +103,7 @@ Ideas: `astralforgeae.com`, `astralforge.ae`, `astralforge.consulting` — only 
 | **Zoho Mail** | Free tier for custom domains |
 | **Cloudflare Email Routing** | Free: forward `info@…` to your personal Gmail |
 
-Until then, keep using WhatsApp / a personal Gmail, and update `info@astralforgeae.com` on the site when ready.
+Until then, keep using WhatsApp / a personal Gmail, and update `astralfconsulting@gmail.com` on the site when ready.
 
 ## Structure
 
