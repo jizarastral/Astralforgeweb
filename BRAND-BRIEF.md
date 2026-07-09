@@ -1,50 +1,42 @@
 # AstralForgeAE — brand brief (copy into any Grok / AI chat)
 
-Paste this whole file (or the block below) into **Grok on Chrome**, another session, or any AI so it knows the business.
-
----
-
 ## One-liner
 
-AstralForgeAE is a UAE precision fabrication & technical consulting practice: shop drawings, glass fabrication, HVAC installation up to G+20 floors, 3D printing, and custom solutions.
+AstralForgeAE is a UAE web development & IT solutions practice: websites, IT support, automation, short-form content — clear pricing from **100 AED per day**.
 
 ## Live links
 
 - Website: https://astralforgeweb.onrender.com  
-- Quote page: https://astralforgeweb.onrender.com/quote.html  
+- Quote: https://astralforgeweb.onrender.com/quote.html  
 - GitHub: https://github.com/jizarastral/Astralforgeweb  
+- Clips: https://jizarastral.github.io/astral-clips/  
 - Linktree: https://linktr.ee/AstralForgeAE  
 
 ## Contact
 
 - Email: astralfconsulting@gmail.com  
 - Projects WhatsApp: +971 50 580 4276  
-- Technical support: +971 50 836 4246  
+- Support: +971 50 836 4246  
 
-## Social
+## Services
 
-- Instagram: @astralforgeconsulting  
-- Facebook: AstralForgeAE  
-- X: @Astralforgecons  
+1. Web development (sites, landings, deploy)  
+2. IT solutions (setup, support, domains)  
+3. Automation & tools  
+4. Digital growth / video clips  
+5. Daily build days from **100 AED**  
 
-## Services (detail)
+## Public pricing
 
-1. **Shop drawings** — elevations, sections, façade/glass detailing, revision-controlled docs  
-2. **Advanced fabrication** — tempered/laminated glass systems, hardware, quality checks  
-3. **HVAC installation** — split, central, VRF; ducting & commissioning; buildings **up to G+20**  
-4. **3D printing** — prototypes, architectural models, custom parts  
-5. **Custom solutions** — complex geometry, one-off installs, end-to-end coordination  
+- Build Day: **100 AED/day**  
+- Business website: **999 AED+**  
+- Clips: **99 / 199 / 349 AED**  
+- Monthly care: **1,499 AED/mo**  
 
-## Brand style (website)
+## Owner context (internal)
 
-- Dark futuristic: background #050814, cyan #5ee7ff, indigo/violet accents  
-- Fonts: Outfit + JetBrains Mono  
-- Voice: precise, confident, engineering-led, UAE market  
+Prior goal: earn ~**100 AED/day average** with 4–5 focused hours (outreach + delivery). Site sells real services that support that model — never claim guaranteed income to clients.
 
-## What to help with
+## Short memory line
 
-When I mention AstralForge, help with: website edits, social posts/bios, quotes, proposals, HVAC/3D marketing copy, Render/GitHub deploy notes, and brand-consistent design — using the contacts and services above only.
-
-## Short memory line (save this in Grok Memory if available)
-
-> AstralForgeAE (UAE): shop drawings, glass fab, HVAC to G+20, 3D printing. Site astralforgeweb.onrender.com. Email astralfconsulting@gmail.com. WA +971505804276 / support +971508364246. GitHub jizarastral/Astralforgeweb.
+> AstralForgeAE UAE: web dev, IT, automation, clips. From 100 AED/day. Site astralforgeweb.onrender.com. Email astralfconsulting@gmail.com. WA +971505804276 / +971508364246. GitHub jizarastral/Astralforgeweb.

@@ -72,20 +72,9 @@
   /* Quote form */
   const quoteForm = document.getElementById("quoteForm");
   if (quoteForm) {
-    const serviceSelect = document.getElementById("service");
-    const hvacFields = document.getElementById("hvacFields");
     const formError = document.getElementById("formError");
     const formSuccess = document.getElementById("formSuccess");
     let submitChannel = "whatsapp";
-
-    const toggleHvac = () => {
-      if (!serviceSelect || !hvacFields) return;
-      const isHvac = (serviceSelect.value || "").toLowerCase().includes("hvac");
-      hvacFields.hidden = !isHvac;
-    };
-
-    serviceSelect?.addEventListener("change", toggleHvac);
-    toggleHvac();
 
     quoteForm.querySelectorAll('button[type="submit"]').forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -110,11 +99,6 @@
         `Location: ${val("location") || "—"}`,
         `Timeline: ${val("timeline") || "—"}`,
       ];
-
-      if ((val("service") || "").toLowerCase().includes("hvac")) {
-        lines.push(`Floors: ${val("floors") || "—"}`);
-        lines.push(`HVAC type: ${val("hvacType") || "—"}`);
-      }
 
       lines.push("", "Details:", val("details"));
       return lines.join("\n");
