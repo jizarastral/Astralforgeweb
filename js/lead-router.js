@@ -1,15 +1,15 @@
 /**
  * Lead routing for AstralForgeAE
- * - Sales primary: +971 55 445 8850
- * - Support primary: +971 50 836 4246
- * - Analysis copy (always): +971 50 580 4276
+ * - Sales: +971 55 445 8850
+ * - Technical: +971 50 836 4246
+ * - Client happiness (copy of every lead): +971 50 580 4276
  * - Email: astralfconsulting@gmail.com
  */
 (function (global) {
   const LEAD_EMAIL = "astralfconsulting@gmail.com";
   const SALES_WA = "971554458850";
-  const SUPPORT_WA = "971508364246";
-  const ANALYSIS_WA = "971505804276";
+  const TECHNICAL_WA = "971508364246";
+  const CLIENT_HAPPINESS_WA = "971505804276";
 
   function waLink(number, text) {
     const n = String(number).replace(/\D/g, "");
@@ -17,11 +17,11 @@
   }
 
   function primaryFor(channel) {
-    return channel === "support" ? SUPPORT_WA : SALES_WA;
+    return channel === "support" || channel === "technical" ? TECHNICAL_WA : SALES_WA;
   }
 
   function labelFor(channel) {
-    return channel === "support" ? "SUPPORT" : "SALES";
+    return channel === "support" || channel === "technical" ? "TECHNICAL" : "SALES";
   }
 
   async function emailLead(subject, fields) {
@@ -45,11 +45,9 @@
     }
   }
 
-  /**
-   * @param {{ channel?: 'sales'|'support', subject: string, fields: object, waText: string }} opts
-   */
   async function deliverLead(opts) {
-    const channel = opts.channel === "support" ? "support" : "sales";
+    const channel =
+      opts.channel === "support" || opts.channel === "technical" ? "technical" : "sales";
     const primary = primaryFor(channel);
     const label = labelFor(channel);
 
@@ -57,40 +55,40 @@
       ...opts.fields,
       channel: label,
       routed_primary: `+${primary}`,
-      routed_analysis_copy: `+${ANALYSIS_WA}`,
+      routed_client_happiness_copy: `+${CLIENT_HAPPINESS_WA}`,
     };
 
     const emailOk = await emailLead(opts.subject, fields);
 
     window.open(waLink(primary, opts.waText), "_blank", "noopener,noreferrer");
 
-    const analysisText =
-      `[ANALYSIS COPY · ${label}]\n` +
+    const copyText =
+      `[CLIENT HAPPINESS COPY · ${label}]\n` +
       `Primary: +${primary}\n` +
       `—\n` +
       opts.waText;
 
     setTimeout(() => {
-      window.open(waLink(ANALYSIS_WA, analysisText), "_blank", "noopener,noreferrer");
+      window.open(waLink(CLIENT_HAPPINESS_WA, copyText), "_blank", "noopener,noreferrer");
     }, 600);
 
-    return { emailOk, primary, analysis: ANALYSIS_WA };
+    return { emailOk, primary, clientHappiness: CLIENT_HAPPINESS_WA };
   }
 
-  /** Intercept sales/support WA links and dual-open analysis copy */
   function wireDualWaLinks() {
     document.addEventListener("click", (e) => {
       const a = e.target.closest("a[data-wa-channel]");
       if (!a) return;
       const channel = a.getAttribute("data-wa-channel");
-      if (channel !== "sales" && channel !== "support") return;
+      if (channel !== "sales" && channel !== "support" && channel !== "technical") return;
 
       const href = a.getAttribute("href") || "";
       if (!href.includes("wa.me") && !href.includes("whatsapp")) return;
 
       e.preventDefault();
-      const primary = primaryFor(channel);
-      const label = labelFor(channel);
+      const ch = channel === "support" ? "technical" : channel;
+      const primary = primaryFor(ch);
+      const label = labelFor(ch);
       let text = "";
       try {
         const u = new URL(href, window.location.origin);
@@ -98,7 +96,7 @@
       } catch (_) {}
       if (!text) {
         text =
-          channel === "support"
+          ch === "technical"
             ? "Hello AstralForgeAE Technical Support, I need assistance."
             : "Hello AstralForgeAE Sales, I'd like a quote.";
       }
@@ -107,8 +105,8 @@
       setTimeout(() => {
         window.open(
           waLink(
-            ANALYSIS_WA,
-            `[ANALYSIS COPY · ${label}]\nPrimary: +${primary}\n—\n${text}`
+            CLIENT_HAPPINESS_WA,
+            `[CLIENT HAPPINESS COPY · ${label}]\nPrimary: +${primary}\n—\n${text}`
           ),
           "_blank",
           "noopener,noreferrer"
@@ -120,8 +118,10 @@
   global.AstralLeadRouter = {
     LEAD_EMAIL,
     SALES_WA,
-    SUPPORT_WA,
-    ANALYSIS_WA,
+    TECHNICAL_WA,
+    CLIENT_HAPPINESS_WA,
+    ANALYSIS_WA: CLIENT_HAPPINESS_WA,
+    SUPPORT_WA: TECHNICAL_WA,
     deliverLead,
     wireDualWaLinks,
     waLink,

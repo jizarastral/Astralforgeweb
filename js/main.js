@@ -195,8 +195,8 @@
       if (formSuccess) {
         formSuccess.hidden = false;
         formSuccess.textContent = result.emailOk
-          ? "Lead sent to email + primary WhatsApp + analysis copy (+971 50 580 4276). Send both chats if they opened."
-          : "WhatsApp opened (primary + analysis copy). Confirm FormSubmit in Gmail once for email.";
+          ? "Lead sent to email + Sales/Technical WhatsApp + Client happiness copy (+971 50 580 4276). Send both chats if they opened."
+          : "WhatsApp opened (primary + Client happiness copy). Confirm FormSubmit in Gmail once for email.";
       }
     });
   }
