@@ -718,7 +718,8 @@ button {
   gap: 24px;
 }
 
-.services-grid-5 {
+.services-grid-5,
+.services-grid-6 {
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -737,6 +738,10 @@ button {
 
   .services-grid-5 .service-card:nth-child(5) {
     grid-column: 4 / span 2;
+  }
+
+  .services-grid-6 {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -1577,7 +1582,8 @@ button {
   }
 
   .services-grid,
-  .services-grid-5 {
+  .services-grid-5,
+  .services-grid-6 {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -1655,7 +1661,8 @@ button {
   }
 
   .services-grid,
-  .services-grid-5 {
+  .services-grid-5,
+  .services-grid-6 {
     grid-template-columns: 1fr;
     max-width: 480px;
     margin: 0 auto;

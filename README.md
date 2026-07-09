@@ -1,6 +1,6 @@
 # AstralForgeAE Website
 
-Web development, IT solutions & digital growth for UAE businesses.
+Precision fabrication, HVAC, 3D printing — and **IT & web solutions** as part of the same UAE practice.
 
 **Live:** https://astralforgeweb.onrender.com
 
@@ -12,14 +12,9 @@ Web development, IT solutions & digital growth for UAE businesses.
 | Projects WhatsApp | +971 50 580 4276 |
 | Technical Support | +971 50 836 4246 |
 
-## Pricing (public)
+## Services
 
-| Offer | Price |
-|-------|--------|
-| Build Day | 100 AED / day |
-| Business website | 999 AED+ |
-| Clips (Spark / Boost / Dominate) | 99 / 199 / 349 AED |
-| IT + Web Care retainer | 1,499 AED / mo |
+Shop drawings · Glass fabrication · HVAC (G+20) · 3D printing · IT & web · Custom solutions
 
 ## Local preview
 
@@ -29,9 +24,9 @@ npm run dev
 
 ## Deploy
 
-Push `main` to GitHub — Render static site auto-deploys.
+Push `main` → Render static site auto-deploys.
 
-## Context for AI / new sessions
+## AI context
 
-- `AGENTS.md` — project rules (auto-loaded in Grok Build)
-- `BRAND-BRIEF.md` — paste into Chrome Grok or any chat
+- `AGENTS.md` — Grok Build project rules  
+- `BRAND-BRIEF.md` — paste into other chats  

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Request a free quote from AstralForgeAE — web development, IT solutions, automation, clips. Build days from 100 AED." />
+  <meta name="description" content="Request a free quote from AstralForgeAE — shop drawings, glass fabrication, HVAC up to G+20, 3D printing, and custom solutions across the UAE." />
   <meta name="theme-color" content="#050814" />
   <meta property="og:title" content="Get a Quote | AstralForgeAE" />
-  <meta property="og:description" content="Websites, IT support, automation & clips. Pricing from 100 AED/day." />
+  <meta property="og:description" content="Tell us about your project. Free quotes for HVAC, 3D printing, fabrication & shop drawings." />
   <meta property="og:type" content="website" />
-  <title>Get a Quote | AstralForgeAE Web & IT</title>
+  <title>Get a Quote | AstralForgeAE</title>
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,7 +32,6 @@
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Primary">
         <a href="index.html#services">Services</a>
-        <a href="index.html#pricing">Pricing</a>
         <a href="index.html#process">Process</a>
         <a href="index.html#about">About</a>
         <a href="quote.html" aria-current="page">Get a Quote</a>
@@ -54,8 +53,8 @@
         <span class="eyebrow reveal"><span class="pulse-dot"></span> Free project estimate</span>
         <h1 class="reveal delay-1">Request a <span class="gradient-text">quote</span></h1>
         <p class="page-hero-lead reveal delay-2">
-          Tell us about your project — website, IT support, automation, clips, or a 100 AED build day.
-          We will reply with next steps and clear pricing.
+          Tell us about your project — shop drawings, glass, HVAC up to G+20, 3D printing, IT &amp; web solutions, or custom work.
+          We will respond with next steps and pricing guidance.
         </p>
       </div>
     </section>
@@ -91,24 +90,49 @@
                 <label for="service">Service needed <span class="req">*</span></label>
                 <select id="service" name="service" required>
                   <option value="" disabled selected>Select a service</option>
-                  <option value="100 AED Build Day">100 AED Build Day</option>
-                  <option value="Web Development">Web Development / Website</option>
-                  <option value="IT Solutions">IT Solutions / Support</option>
-                  <option value="Automation">Automation & Tools</option>
-                  <option value="Digital Growth / Clips">Digital Growth / Clips</option>
-                  <option value="Monthly Retainer">Monthly IT + Web Care</option>
-                  <option value="Multiple Services">Multiple / Combined</option>
+                  <option value="Shop Drawings">Shop Drawings</option>
+                  <option value="Advanced Fabrication">Advanced Fabrication / Glass</option>
+                  <option value="HVAC Installation">HVAC Installation (up to G+20)</option>
+                  <option value="3D Printing">3D Printing</option>
+                  <option value="IT & Web Solutions">IT & Web Solutions</option>
+                  <option value="Custom Solutions">Custom Solutions</option>
+                  <option value="Multiple Services">Multiple / Combined Services</option>
                 </select>
               </div>
               <div class="form-field">
                 <label for="location">Project location</label>
-                <input type="text" id="location" name="location" placeholder="e.g. Dubai, Abu Dhabi, Online" />
+                <input type="text" id="location" name="location" placeholder="e.g. Dubai, Abu Dhabi, Sharjah" />
+              </div>
+            </div>
+
+            <div class="form-row form-row-hvac" id="hvacFields" hidden>
+              <div class="form-field">
+                <label for="floors">Building floors</label>
+                <select id="floors" name="floors">
+                  <option value="">Select range</option>
+                  <option value="G to G+3">G to G+3</option>
+                  <option value="G+4 to G+10">G+4 to G+10</option>
+                  <option value="G+11 to G+20">G+11 to G+20</option>
+                  <option value="Villa / low-rise">Villa / low-rise</option>
+                  <option value="Not sure">Not sure yet</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="hvacType">HVAC system type</label>
+                <select id="hvacType" name="hvacType">
+                  <option value="">Select type</option>
+                  <option value="Split AC">Split AC</option>
+                  <option value="Central AC">Central AC</option>
+                  <option value="VRF / VRV">VRF / VRV</option>
+                  <option value="Ducted package">Ducted package</option>
+                  <option value="Not sure">Not sure — need advice</option>
+                </select>
               </div>
             </div>
 
             <div class="form-field">
               <label for="details">Project details <span class="req">*</span></label>
-              <textarea id="details" name="details" rows="5" required placeholder="What do you need? Site type, IT issue, video link for clips, budget, deadline…"></textarea>
+              <textarea id="details" name="details" rows="5" required placeholder="Scope, timeline, drawings available, materials, quantities, or any special requirements…"></textarea>
             </div>
 
             <div class="form-field">
@@ -151,24 +175,28 @@
             <span class="eyebrow"><span class="pulse-dot"></span> What we quote</span>
             <ul class="quote-service-list">
               <li>
-                <strong>Build Day</strong>
-                <span>Focused work from <em>100 AED / day</em></span>
+                <strong>Shop Drawings</strong>
+                <span>Elevations, sections, coordinated production docs</span>
               </li>
               <li>
-                <strong>Web Development</strong>
-                <span>Business sites, landings, deploy live</span>
+                <strong>Glass Fabrication</strong>
+                <span>Tempered, laminated & specialty systems</span>
               </li>
               <li>
-                <strong>IT Solutions</strong>
-                <span>Setup, support, domains, accounts</span>
+                <strong>HVAC Installation</strong>
+                <span>Residential & commercial — up to <em>G+20 floors</em></span>
               </li>
               <li>
-                <strong>Automation</strong>
-                <span>Workflows, tools, WhatsApp ops</span>
+                <strong>3D Printing</strong>
+                <span>Prototypes, models, custom parts</span>
               </li>
               <li>
-                <strong>Clips &amp; Growth</strong>
-                <span>From <em>99 AED</em> short-form packages</span>
+                <strong>IT &amp; Web Solutions</strong>
+                <span>Websites, IT support, automation — from <em>100 AED/day</em></span>
+              </li>
+              <li>
+                <strong>Custom Solutions</strong>
+                <span>Complex builds & technical consulting</span>
               </li>
             </ul>
           </div>

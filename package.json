@@ -1,7 +1,7 @@
 {
   "name": "astralforge-web",
   "version": "1.0.0",
-  "description": "AstralForgeAE — web development, IT solutions & digital growth from 100 AED/day (UAE)",
+  "description": "AstralForgeAE — fabrication, HVAC G+20, 3D printing, IT & web solutions (UAE)",
   "private": true,
   "scripts": {
     "start": "npx --yes serve -s . -l ${PORT:-3000}",
