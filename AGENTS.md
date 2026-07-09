@@ -26,9 +26,11 @@ Static multi-page site for **AstralForgeAE** (UAE).
 | Channel | Value |
 |---------|--------|
 | Email | **astralfconsulting@gmail.com** |
-| Sales WhatsApp | **+971 50 580 4276** |
-| Projects WhatsApp | +971 50 580 4276 |
-| Support | +971 50 836 4246 |
+| Sales (primary) | **+971 55 445 8850** |
+| Support (primary) | **+971 50 836 4246** |
+| Analysis / ops copy (always) | **+971 50 580 4276** |
+
+Lead routing: sales → 55…8850 + copy to 50…4276; support → 50…4246 + copy to 50…4276; forms also email Gmail.
 | Instagram | @astralforgeconsulting |
 | Facebook | AstralForgeAE |
 | X | @Astralforgecons |
