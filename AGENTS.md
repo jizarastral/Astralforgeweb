@@ -26,6 +26,7 @@ Static multi-page site for **AstralForgeAE** (UAE).
 | Channel | Value |
 |---------|--------|
 | Email | **astralfconsulting@gmail.com** |
+| Sales WhatsApp | **+971 55 445 8850** |
 | Projects WhatsApp | +971 50 580 4276 |
 | Support | +971 50 836 4246 |
 | Instagram | @astralforgeconsulting |

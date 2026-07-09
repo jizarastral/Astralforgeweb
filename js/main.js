@@ -168,7 +168,7 @@
         window.location.href = `mailto:astralfconsulting@gmail.com?subject=${subject}&body=${body}`;
       } else {
         const text = encodeURIComponent(message);
-        window.open(`https://wa.me/971505804276?text=${text}`, "_blank", "noopener,noreferrer");
+        window.open(`https://wa.me/971554458850?text=${text}`, "_blank", "noopener,noreferrer");
       }
     });
   }
