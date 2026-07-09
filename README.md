@@ -42,7 +42,8 @@ Then visit `http://localhost:3000`.
 5. Settings:
    - **Build Command:** leave empty
    - **Publish Directory:** `.`
-6. Create Static Site — Render will give you a URL like `https://astralforge-web.onrender.com`.
+6. Create Static Site — Render will give you a free URL like  
+   **`https://astralforgeweb.onrender.com`** (this is the live site today).
 
 ### Option B — Blueprint
 
@@ -50,42 +51,59 @@ Then visit `http://localhost:3000`.
 2. **New → Blueprint**.
 3. Select the repo (uses `render.yaml`).
 
-## Custom domain (your own domain)
+## Custom domain (own brand URL)
 
-Yes — you can use your own domain (e.g. `astralforgeae.com` or `astralforge.ae`).
+**Important:** Words like `yourdomain.com` in guides are **examples only**. That domain is owned by someone else — do **not** type it into a browser or DNS. Only use a domain **you bought**.
 
-### 1. Buy a domain
+**Live site right now (no custom domain required):**  
+https://astralforgeweb.onrender.com
 
-Pick a registrar and purchase the name:
+### If a custom domain shows the wrong website
+
+Usually DNS still points at an old host, parking page, or another Render service.
+
+1. Open [dashboard.render.com](https://dashboard.render.com) → service **astralforgeweb** (or your static site name).
+2. **Settings → Custom Domains** — add only the domain **you purchased** (e.g. `astralforgeae.com`).
+3. Copy the exact DNS values Render shows (do not invent records).
+4. At your **domain registrar** (where you bought the domain):
+   - Remove old **A**, **CNAME**, and **URL redirect** records for `@` and `www`.
+   - Add **only** the records Render lists.
+5. Typical pattern:
+
+   | Host | Type | Value |
+   |------|------|--------|
+   | `www` | CNAME | `astralforgeweb.onrender.com` (or the host Render shows) |
+   | `@` (root) | A or ALIAS | IP / target **from Render** (not from random tutorials) |
+
+6. Wait for DNS (minutes to 48h). In Render the domain should show **Verified** + HTTPS.
+7. Test in a private/incognito window.
+
+**Checks if it still looks wrong:**
+
+- You opened the free Render URL by mistake vs the custom domain
+- Domain is still on registrar **parking / “for sale”** page
+- Cloudflare **proxy (orange cloud)** is on before the domain is verified — try DNS-only (grey cloud) first
+- Domain was added to a **different** Render service
+
+### 1. Buy a domain (only if you want a branded URL)
 
 | Type | Examples |
 |------|----------|
-| International (`.com`, `.net`) | [Cloudflare Registrar](https://www.cloudflare.com/products/registrar/), Namecheap, Google Domains alternatives (Squarespace), Porkbun |
-| UAE (`.ae`) | [nic.ae](https://nic.ae/) accredited registrars (e.g. ae.domain, some local hosts) |
+| International (`.com`, `.net`) | [Cloudflare Registrar](https://www.cloudflare.com/products/registrar/), Namecheap, Porkbun |
+| UAE (`.ae`) | [nic.ae](https://nic.ae/) accredited registrars |
 
-Suggested names: `astralforgeae.com`, `astralforge.ae`, `astralforge.consulting`.
+Ideas: `astralforgeae.com`, `astralforge.ae`, `astralforge.consulting` — only after you confirm the name is free and **you** complete the purchase.
 
-Typical cost: ~$10–15/year for `.com`; `.ae` is usually higher.
-
-### 2. Point the domain to Render
-
-1. In **Render** → your static site → **Settings → Custom Domains** → add `astralforgeae.com` (and optionally `www`).
-2. Render shows the DNS records you need (usually a **CNAME** for `www` and an **A/ALIAS** or CNAME for the root, depending on the registrar).
-3. In your domain registrar’s **DNS** panel, add those records exactly.
-4. Wait for DNS (often minutes, sometimes up to 24–48 hours). Render will issue a free HTTPS certificate.
-
-### 3. Professional email on your domain
-
-After you own the domain, set up mailboxes such as `info@astralforgeae.com`:
+### 2. Professional email (after you own the domain)
 
 | Option | Notes |
 |--------|--------|
-| **Google Workspace** | Paid, polished Gmail interface |
-| **Microsoft 365** | Outlook-style business mail |
-| **Zoho Mail** | Free tier available for custom domains |
+| **Google Workspace** | Paid Gmail for business |
+| **Microsoft 365** | Outlook business mail |
+| **Zoho Mail** | Free tier for custom domains |
 | **Cloudflare Email Routing** | Free: forward `info@…` to your personal Gmail |
 
-Then update the email links on this site if needed.
+Until then, keep using WhatsApp / a personal Gmail, and update `info@astralforgeae.com` on the site when ready.
 
 ## Structure
 
