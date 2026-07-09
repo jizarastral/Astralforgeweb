@@ -69,14 +69,15 @@
     });
   }
 
-  /* Quote form */
+  /* Quote form — every lead → Gmail + Sales WhatsApp */
   const quoteForm = document.getElementById("quoteForm");
   if (quoteForm) {
+    const LEAD_EMAIL = "astralfconsulting@gmail.com";
+    const SALES_WA = "971554458850";
     const serviceSelect = document.getElementById("service");
     const hvacFields = document.getElementById("hvacFields");
     const formError = document.getElementById("formError");
     const formSuccess = document.getElementById("formSuccess");
-    let submitChannel = "whatsapp";
 
     const toggleHvac = () => {
       if (!serviceSelect || !hvacFields) return;
@@ -86,12 +87,6 @@
 
     serviceSelect?.addEventListener("change", toggleHvac);
     toggleHvac();
-
-    quoteForm.querySelectorAll('button[type="submit"]').forEach((btn) => {
-      btn.addEventListener("click", () => {
-        submitChannel = btn.getAttribute("data-channel") || "whatsapp";
-      });
-    });
 
     const val = (id) => {
       const el = document.getElementById(id);
@@ -120,7 +115,35 @@
       return lines.join("\n");
     };
 
-    quoteForm.addEventListener("submit", (e) => {
+    const deliverLead = async (subject, fields, waText) => {
+      let emailOk = false;
+      try {
+        const res = await fetch(`https://formsubmit.co/ajax/${LEAD_EMAIL}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            ...fields,
+            _subject: subject,
+            _template: "table",
+            _captcha: "false",
+          }),
+        });
+        emailOk = res.ok;
+      } catch (_) {
+        emailOk = false;
+      }
+      window.open(
+        `https://wa.me/${SALES_WA}?text=${encodeURIComponent(waText)}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
+      return emailOk;
+    };
+
+    quoteForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (formError) {
         formError.hidden = true;
@@ -158,17 +181,41 @@
       }
 
       const message = buildMessage();
-      if (formSuccess) formSuccess.hidden = false;
+      const submitBtns = quoteForm.querySelectorAll('button[type="submit"]');
+      submitBtns.forEach((b) => {
+        b.disabled = true;
+      });
 
-      if (submitChannel === "email") {
-        const subject = encodeURIComponent(
-          `Quote request: ${val("service")} — ${val("name")}`
-        );
-        const body = encodeURIComponent(message);
-        window.location.href = `mailto:astralfconsulting@gmail.com?subject=${subject}&body=${body}`;
-      } else {
-        const text = encodeURIComponent(message);
-        window.open(`https://wa.me/971554458850?text=${text}`, "_blank", "noopener,noreferrer");
+      const fields = {
+        type: "quote",
+        name: val("name"),
+        company: val("company") || "—",
+        email: val("email"),
+        phone: val("phone"),
+        service: val("service"),
+        location: val("location") || "—",
+        timeline: val("timeline") || "—",
+        floors: val("floors") || "—",
+        hvac_type: val("hvacType") || "—",
+        details: val("details"),
+        source: "astralforgeweb.onrender.com/quote",
+      };
+
+      const emailOk = await deliverLead(
+        `AstralForgeAE quote — ${val("service")} — ${val("name")}`,
+        fields,
+        message
+      );
+
+      submitBtns.forEach((b) => {
+        b.disabled = false;
+      });
+
+      if (formSuccess) {
+        formSuccess.hidden = false;
+        formSuccess.textContent = emailOk
+          ? "Lead sent to email + WhatsApp sales. Complete the WhatsApp send if it opened."
+          : "WhatsApp opened for sales. Confirm FormSubmit in Gmail once so email delivery works.";
       }
     });
   }
