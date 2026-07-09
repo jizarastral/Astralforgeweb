@@ -69,11 +69,14 @@
     });
   }
 
-  /* Quote form — every lead → Gmail + Sales WhatsApp */
+  /* Dual-open sales/support WA + analysis copy */
+  if (window.AstralLeadRouter) {
+    window.AstralLeadRouter.wireDualWaLinks();
+  }
+
+  /* Quote form — email + sales WA + analysis copy */
   const quoteForm = document.getElementById("quoteForm");
-  if (quoteForm) {
-    const LEAD_EMAIL = "astralfconsulting@gmail.com";
-    const SALES_WA = "971505804276";
+  if (quoteForm && window.AstralLeadRouter) {
     const serviceSelect = document.getElementById("service");
     const hvacFields = document.getElementById("hvacFields");
     const formError = document.getElementById("formError");
@@ -113,34 +116,6 @@
 
       lines.push("", "Details:", val("details"));
       return lines.join("\n");
-    };
-
-    const deliverLead = async (subject, fields, waText) => {
-      let emailOk = false;
-      try {
-        const res = await fetch(`https://formsubmit.co/ajax/${LEAD_EMAIL}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            ...fields,
-            _subject: subject,
-            _template: "table",
-            _captcha: "false",
-          }),
-        });
-        emailOk = res.ok;
-      } catch (_) {
-        emailOk = false;
-      }
-      window.open(
-        `https://wa.me/${SALES_WA}?text=${encodeURIComponent(waText)}`,
-        "_blank",
-        "noopener,noreferrer"
-      );
-      return emailOk;
     };
 
     quoteForm.addEventListener("submit", async (e) => {
@@ -186,6 +161,11 @@
         b.disabled = true;
       });
 
+      // Support-related services → support channel; rest → sales
+      const svc = (val("service") || "").toLowerCase();
+      const channel =
+        svc.includes("support") || svc.includes("it support") ? "support" : "sales";
+
       const fields = {
         type: "quote",
         name: val("name"),
@@ -201,11 +181,12 @@
         source: "astralforgeweb.onrender.com/quote",
       };
 
-      const emailOk = await deliverLead(
-        `AstralForgeAE quote — ${val("service")} — ${val("name")}`,
+      const result = await window.AstralLeadRouter.deliverLead({
+        channel,
+        subject: `AstralForgeAE quote — ${val("service")} — ${val("name")}`,
         fields,
-        message
-      );
+        waText: message,
+      });
 
       submitBtns.forEach((b) => {
         b.disabled = false;
@@ -213,9 +194,9 @@
 
       if (formSuccess) {
         formSuccess.hidden = false;
-        formSuccess.textContent = emailOk
-          ? "Lead sent to email + WhatsApp sales. Complete the WhatsApp send if it opened."
-          : "WhatsApp opened for sales. Confirm FormSubmit in Gmail once so email delivery works.";
+        formSuccess.textContent = result.emailOk
+          ? "Lead sent to email + primary WhatsApp + analysis copy (+971 50 580 4276). Send both chats if they opened."
+          : "WhatsApp opened (primary + analysis copy). Confirm FormSubmit in Gmail once for email.";
       }
     });
   }
