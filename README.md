@@ -9,7 +9,7 @@ Precision fabrication, HVAC, 3D printing — and **IT & web solutions** as part 
 | Role | Contact |
 |------|---------|
 | Email | astralfconsulting@gmail.com |
-| Sales WhatsApp | +971 55 445 8850 |
+| Sales WhatsApp | +971 50 580 4276 |
 | Projects WhatsApp | +971 50 580 4276 |
 | Technical Support | +971 50 836 4246 |
 

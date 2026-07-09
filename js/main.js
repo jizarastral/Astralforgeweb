@@ -73,7 +73,7 @@
   const quoteForm = document.getElementById("quoteForm");
   if (quoteForm) {
     const LEAD_EMAIL = "astralfconsulting@gmail.com";
-    const SALES_WA = "971554458850";
+    const SALES_WA = "971505804276";
     const serviceSelect = document.getElementById("service");
     const hvacFields = document.getElementById("hvacFields");
     const formError = document.getElementById("formError");
