@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
   <meta name="theme-color" content="#050814" />
   <meta name="robots" content="noindex, nofollow" />
-  <meta name="description" content="AstralForgeAE staff fit-out quote tool — authorised access only." />
-  <title>Staff Quote · AstralForgeAE</title>
+  <meta name="description" content="AstralForgeAE technical fit-out quote tool — authorised access only." />
+  <title>Technical Quote · AstralForgeAE</title>
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/staff-quote.css" />
+  <link rel="stylesheet" href="../css/technical-quote.css" />
 </head>
 <body>
   <!-- LOGIN (Afsal only) -->
@@ -20,7 +20,7 @@
       <div class="brand-row">
         <img src="../assets/images/logo-star.jpg" alt="AstralForgeAE" width="44" height="44" />
         <div>
-          <h1>Staff access</h1>
+          <h1>Technical access</h1>
           <p class="sub">Fit-out quote builder · Afsal only</p>
         </div>
       </div>
@@ -51,9 +51,9 @@
   <div class="app-shell" id="appShell">
     <header class="app-header">
       <h1>AstralForgeAE · Fit-out Quote</h1>
-      <div class="staff-bar">
-        <div class="sub">Rate book Jul 2026 · <span class="badge">Staff</span></div>
-        <div class="who">Signed in as <strong id="staffUser">afsal</strong>
+      <div class="tech-bar">
+        <div class="sub">Rate book Jul 2026 · <span class="badge">Technical</span></div>
+        <div class="who">Signed in as <strong id="techUser">afsal</strong>
           · <button type="button" class="btn btn-ghost" id="btnLogout" style="display:inline;padding:4px 8px">Logout</button>
         </div>
       </div>
@@ -170,8 +170,8 @@
   <div id="printSheet"></div>
 
   <script src="../js/ratebook.js"></script>
-  <script src="../js/staff-auth.js"></script>
-  <script src="../js/staff-quote.js"></script>
+  <script src="../js/technical-auth.js"></script>
+  <script src="../js/technical-quote.js"></script>
   <script>
     (function () {
       const gate = document.getElementById("loginGate");
@@ -182,12 +182,12 @@
       function enterApp() {
         gate.classList.add("hidden");
         shell.classList.add("active");
-        const u = window.StaffAuth.currentUser() || "afsal";
-        document.getElementById("staffUser").textContent = u;
-        window.StaffQuoteApp.init();
+        const u = window.TechnicalAuth.currentUser() || "afsal";
+        document.getElementById("techUser").textContent = u;
+        window.TechnicalQuoteApp.init();
       }
 
-      if (window.StaffAuth.isLoggedIn()) {
+      if (window.TechnicalAuth.isLoggedIn()) {
         enterApp();
       }
 
@@ -198,7 +198,7 @@
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const remember = document.getElementById("remember").checked;
-        const result = await window.StaffAuth.login(username, password, remember);
+        const result = await window.TechnicalAuth.login(username, password, remember);
         if (!result.ok) {
           err.textContent = result.error;
           err.classList.add("show");
@@ -208,7 +208,7 @@
       });
 
       document.getElementById("btnLogout").addEventListener("click", () => {
-        window.StaffAuth.logout();
+        window.TechnicalAuth.logout();
         shell.classList.remove("active");
         gate.classList.remove("hidden");
         document.getElementById("password").value = "";

@@ -23,11 +23,11 @@ Shop drawings · Glass fabrication · HVAC (G+20) · 3D printing · IT & web · 
 npm run dev
 ```
 
-## Staff fit-out quote tool
+## Technical fit-out quote tool
 
-- **Path:** `/staff/` (login required)
+- **Path:** `/technical/` (login required)
 - **Username:** `afsal` only
-- **Password:** set in `js/staff-auth.js` (SHA-256; default documented with Afsal privately)
+- **Password:** set in `js/technical-auth.js` (SHA-256; default documented with Afsal privately)
 - Public customer form remains **`quote.html`**
 
 ## Deploy

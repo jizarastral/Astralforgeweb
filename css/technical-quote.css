@@ -132,19 +132,19 @@ body { padding-bottom: calc(var(--nav-h) + var(--safe-b) + 12px); }
 .app-shell.active { display: block; }
 .login-gate.hidden { display: none; }
 
-.staff-bar {
+.tech-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   margin-top: 8px;
 }
-.staff-bar .who {
+.tech-bar .who {
   font-size: 0.78rem;
   color: var(--muted);
   font-family: var(--mono);
 }
-.staff-bar .who strong { color: var(--accent); }
+.tech-bar .who strong { color: var(--accent); }
 
 .totals .grand span:last-child { color: var(--accent); }
 .item .cat, .chip.active { color: var(--accent); }

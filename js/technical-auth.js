@@ -1,10 +1,10 @@
 /**
- * Staff gate — only Afsal may access the fit-out quote tool.
+ * Technical gate — only Afsal may access the fit-out quote tool.
  * Static-site client gate (not a full server auth). Change password by
  * updating PASSWORD_SHA256 below (SHA-256 hex of the new password).
  */
 (function (global) {
-  const AUTH_KEY = "af_staff_session_v1";
+  const AUTH_KEY = "af_technical_session_v1";
   const ALLOWED_USER = "afsal";
   // SHA-256 of: Afsal@AF2026
   const PASSWORD_SHA256 =
@@ -61,7 +61,7 @@
       .trim()
       .toLowerCase();
     if (user !== ALLOWED_USER) {
-      return { ok: false, error: "Access denied. Only authorised staff can sign in." };
+      return { ok: false, error: "Access denied. Only authorised technical users can sign in." };
     }
     if (!password) {
       return { ok: false, error: "Enter your password." };
@@ -83,7 +83,7 @@
     return s ? s.user : null;
   }
 
-  global.StaffAuth = {
+  global.TechnicalAuth = {
     login,
     logout,
     isLoggedIn,

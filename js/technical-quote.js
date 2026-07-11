@@ -1,5 +1,5 @@
 (() => {
-  const STORAGE_KEY = "astralforge_staff_quote_v1";
+  const STORAGE_KEY = "astralforge_technical_quote_v1";
   const ratebook = window.RATEBOOK;
   const fmt = (n) =>
     `${ratebook.currency} ${Number(n || 0).toLocaleString("en-AE", {
@@ -534,7 +534,7 @@
       .replace(/"/g, "&quot;");
   }
 
-  /* ---------- Init (called after staff login) ---------- */
+  /* ---------- Init (called after technical login) ---------- */
   let started = false;
 
   function init() {
@@ -570,5 +570,5 @@
     showScreen("home");
   }
 
-  window.StaffQuoteApp = { init, showScreen };
+  window.TechnicalQuoteApp = { init, showScreen };
 })();
