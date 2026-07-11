@@ -37,6 +37,14 @@ Static multi-page site for **AstralForgeAE** (UAE).
 5. **IT & web solutions** (websites, IT support, automation; day rates from **100 AED**)  
 6. Custom solutions  
 
+## Staff fit-out quote tool
+
+- **URL:** `/staff/` (e.g. https://astralforgeweb.onrender.com/staff/)  
+- **Access:** Afsal only (username `afsal`). Password hash in `js/staff-auth.js`.  
+- **Public quote form** remains `quote.html` for customers.  
+- Rate book: `js/ratebook.js` (fit-out + painting, Jul 2026 rates).  
+- `noindex` on staff page — do not advertise password in public content.
+
 ## Conventions
 
 - Match existing UI; add services carefully.  

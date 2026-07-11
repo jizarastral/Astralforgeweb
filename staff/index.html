@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <meta name="theme-color" content="#050814" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="AstralForgeAE staff fit-out quote tool — authorised access only." />
+  <title>Staff Quote · AstralForgeAE</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/staff-quote.css" />
+</head>
+<body>
+  <!-- LOGIN (Afsal only) -->
+  <div class="login-gate" id="loginGate">
+    <div class="login-card">
+      <div class="brand-row">
+        <img src="../assets/images/logo-star.jpg" alt="AstralForgeAE" width="44" height="44" />
+        <div>
+          <h1>Staff access</h1>
+          <p class="sub">Fit-out quote builder · Afsal only</p>
+        </div>
+      </div>
+      <form id="loginForm" autocomplete="on">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" placeholder="afsal" required />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+        <label class="check">
+          <input type="checkbox" id="remember" />
+          Keep me signed in on this device (12h)
+        </label>
+        <div class="err" id="loginError" role="alert"></div>
+        <button type="submit" class="btn btn-primary" style="margin-top:16px">Sign in</button>
+      </form>
+      <p class="hint">
+        Public site quote form stays at
+        <a href="../quote.html" style="color:var(--accent)">quote.html</a>.
+        This tool is internal — rate book &amp; customer BOQ quotations.
+      </p>
+      <p class="hint" style="margin-top:8px">
+        <a href="../index.html" style="color:var(--muted)">← Back to AstralForgeAE</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- APP (after login) -->
+  <div class="app-shell" id="appShell">
+    <header class="app-header">
+      <h1>AstralForgeAE · Fit-out Quote</h1>
+      <div class="staff-bar">
+        <div class="sub">Rate book Jul 2026 · <span class="badge">Staff</span></div>
+        <div class="who">Signed in as <strong id="staffUser">afsal</strong>
+          · <button type="button" class="btn btn-ghost" id="btnLogout" style="display:inline;padding:4px 8px">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <section id="screen-home" class="screen active">
+      <div class="card">
+        <h2>Quick start</h2>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:0.88rem;line-height:1.4">
+          Build a customer quotation from the full <strong>office fit-out</strong> rate book
+          (painting, partitions, ceilings, flooring, MEP, and more).
+        </p>
+        <div class="stat-grid">
+          <div class="stat"><div class="k">Quote no.</div><div class="v" id="stat-quote">—</div></div>
+          <div class="stat"><div class="k">Line items</div><div class="v" id="stat-items">0</div></div>
+          <div class="stat"><div class="k">Rate book</div><div class="v" id="stat-rates">0</div></div>
+          <div class="stat"><div class="k">Net total</div><div class="v" id="stat-total">AED 0.00</div></div>
+        </div>
+        <div class="btn-row" style="margin-top:14px">
+          <button class="btn btn-primary" id="btn-load-boq">Load full fit-out</button>
+          <button class="btn btn-secondary" id="btn-new">New quote</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Rate book</h2>
+        <p id="rate-source" style="margin:0;color:var(--muted);font-size:0.85rem;line-height:1.4">—</p>
+      </div>
+      <div class="card">
+        <h2>How it works</h2>
+        <ol style="margin:0;padding-left:18px;color:var(--muted);font-size:0.88rem;line-height:1.55">
+          <li>Enter <strong>customer</strong> details</li>
+          <li>Add items from <strong>Rates</strong></li>
+          <li>Adjust qty / rates on <strong>Quote</strong></li>
+          <li><strong>Export</strong> print/PDF, CSV, or share</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="screen-customer" class="screen">
+      <div class="card">
+        <h2>Customer &amp; project</h2>
+        <div class="row2">
+          <div>
+            <label>Quote number</label>
+            <input id="c-quoteNo" autocomplete="off" />
+          </div>
+          <div>
+            <label>Date</label>
+            <input id="c-date" type="date" />
+          </div>
+        </div>
+        <label>Customer name</label>
+        <input id="c-name" placeholder="Company or person" autocomplete="organization" />
+        <div class="row2">
+          <div>
+            <label>Phone</label>
+            <input id="c-phone" type="tel" placeholder="+971 …" />
+          </div>
+          <div>
+            <label>Email</label>
+            <input id="c-email" type="email" placeholder="name@company.com" />
+          </div>
+        </div>
+        <label>Project name</label>
+        <input id="c-project" placeholder="e.g. Office fit-out RAK" />
+        <label>Location</label>
+        <input id="c-location" placeholder="Site / city" />
+        <label>Discount (AED)</label>
+        <input id="c-discount" type="number" min="0" step="any" placeholder="0" />
+        <label>Notes</label>
+        <textarea id="c-notes" placeholder="Validity, exclusions, payment terms…"></textarea>
+      </div>
+    </section>
+
+    <section id="screen-catalog" class="screen">
+      <div class="search-wrap no-print">
+        <input id="search" type="search" placeholder="Search fit-out rates…" />
+      </div>
+      <div class="chips" id="chips"></div>
+      <div id="catalog-list"></div>
+    </section>
+
+    <section id="screen-quote" class="screen">
+      <div id="quote-list"></div>
+      <div id="quote-totals"></div>
+    </section>
+
+    <section id="screen-export" class="screen">
+      <div class="card">
+        <h2>Export quote</h2>
+        <p style="margin:0 0 8px;color:var(--muted);font-size:0.85rem" id="export-summary">—</p>
+        <div class="preview-box" id="preview-box"></div>
+        <div class="btn-row" style="grid-template-columns:1fr 1fr;margin-top:12px">
+          <button class="btn btn-primary" id="btn-print">Print / PDF</button>
+          <button class="btn btn-secondary" id="btn-share">Share</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" id="btn-csv">Export CSV</button>
+          <button class="btn btn-secondary" id="btn-json">Export JSON</button>
+        </div>
+      </div>
+    </section>
+
+    <nav class="bottom-nav no-print" style="grid-template-columns: repeat(5, 1fr)">
+      <button class="nav-btn active" data-screen="home"><span class="ico">⌂</span>Home</button>
+      <button class="nav-btn" data-screen="customer"><span class="ico">◎</span>Customer</button>
+      <button class="nav-btn" data-screen="catalog"><span class="ico">☰</span>Rates</button>
+      <button class="nav-btn" data-screen="quote"><span class="ico">≡</span>Quote</button>
+      <button class="nav-btn" data-screen="export"><span class="ico">↗</span>Export</button>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div id="printSheet"></div>
+
+  <script src="../js/ratebook.js"></script>
+  <script src="../js/staff-auth.js"></script>
+  <script src="../js/staff-quote.js"></script>
+  <script>
+    (function () {
+      const gate = document.getElementById("loginGate");
+      const shell = document.getElementById("appShell");
+      const form = document.getElementById("loginForm");
+      const err = document.getElementById("loginError");
+
+      function enterApp() {
+        gate.classList.add("hidden");
+        shell.classList.add("active");
+        const u = window.StaffAuth.currentUser() || "afsal";
+        document.getElementById("staffUser").textContent = u;
+        window.StaffQuoteApp.init();
+      }
+
+      if (window.StaffAuth.isLoggedIn()) {
+        enterApp();
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        err.classList.remove("show");
+        err.textContent = "";
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const remember = document.getElementById("remember").checked;
+        const result = await window.StaffAuth.login(username, password, remember);
+        if (!result.ok) {
+          err.textContent = result.error;
+          err.classList.add("show");
+          return;
+        }
+        enterApp();
+      });
+
+      document.getElementById("btnLogout").addEventListener("click", () => {
+        window.StaffAuth.logout();
+        shell.classList.remove("active");
+        gate.classList.remove("hidden");
+        document.getElementById("password").value = "";
+      });
+    })();
+  </script>
+</body>
+</html>
