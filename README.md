@@ -1,40 +1,31 @@
-# AstralForgeAE Website
+# AstralForgeAE — Cinematic web
 
-Precision fabrication, HVAC, 3D printing — and **IT & web solutions** as part of the same UAE practice.
+Live: https://astralforgeweb.onrender.com  
 
-**Live:** https://astralforgeweb.onrender.com
-
-## Contacts
-
-| Role | Contact |
-|------|---------|
-| Email | astralfconsulting@gmail.com |
-| Sales WhatsApp | +971 50 580 4276 |
-| Projects WhatsApp | +971 50 580 4276 |
-| Technical Support | +971 50 836 4246 |
-
-## Services
-
-Shop drawings · Glass fabrication · HVAC (G+20) · 3D printing · IT & web · Custom solutions
-
-## Local preview
+## Local
 
 ```bash
-npm run dev
+cd F:\websites\Astralforgeweb
+python -m http.server 3010
 ```
 
-## Technical fit-out quote tool
+Open http://localhost:3010
 
-- **Path:** `/technical/` (login required)
-- **Username:** `afsal` only
-- **Password:** set in `js/technical-auth.js` (SHA-256; default documented with Afsal privately)
-- Public customer form remains **`quote.html`**
+## Stack
+
+Static site · GSAP ScrollTrigger · Lenis · AstralForge cyan/indigo palette  
+Quote form: `quote.html` · Technical portal: `technical/`
+
+## Connected sites
+
+| Role | URL | Repo / path |
+|------|-----|-------------|
+| **Main business** | https://astralforgeweb.onrender.com | this repo |
+| **Astral Gamer cinematic** | https://astralgamer.onrender.com | `F:\astral-gamer-website` |
+| Astral Clips | https://astral-clips.onrender.com | clips |
+
+Who is Astral → primary CTA opens **Astral Gamer cinematic**.
 
 ## Deploy
 
-Push `main` → Render static site auto-deploys.
-
-## AI context
-
-- `AGENTS.md` — Grok Build project rules  
-- `BRAND-BRIEF.md` — paste into other chats  
+Render static root `.` (see `render.yaml`). Push `main` to GitHub when ready.

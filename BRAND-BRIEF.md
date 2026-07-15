@@ -16,15 +16,24 @@ AstralForgeAE (UAE): shop drawings, glass fabrication, HVAC up to G+20, 3D print
 - Projects: +971 50 580 4276  
 - Support: +971 50 836 4246  
 
-## Services
+## Services (cinematic story catalogue)
 
 1. Shop drawings  
-2. Advanced fabrication / glass  
-3. HVAC installation (G+20)  
-4. 3D printing  
-5. IT & web (sites, support, automation) — from ~100 AED/day for digital day work  
-6. Custom solutions  
+2. **Aluminium & glass fabrication** (core)  
+3. Interior fitouts  
+4. HVAC (G+20)  
+5. Structuring  
+6. MEP  
+7. Fire systems  
+8. Security & surveillance  
+9. Strong room  
+10. LED display  
+11. Landscaping  
+12. Advertising & sign boards  
+13. IT solutions  
+14. 3D printing  
+15. **Coming soon:** Legal advice  
 
 ## Short memory line
 
-> AstralForgeAE UAE: fabrication + HVAC G+20 + 3D + IT/web. Site astralforgeweb.onrender.com. Email astralfconsulting@gmail.com. WA +971505804276 / +971508364246.
+> AstralForgeAE UAE: drawings, aluminium & glass fabrication, fitout, HVAC G+20, structure, MEP, fire, security, strong rooms, LED, landscape, signage, IT, 3D; legal soon. Main site astralforgeweb.onrender.com · Gamer astralgamer.onrender.com. Email astralfconsulting@gmail.com. WA +971554458850 / +971508364246 / +971505804276.
