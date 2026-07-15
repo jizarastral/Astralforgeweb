@@ -944,7 +944,8 @@ a.pill-cyan:hover {
 }
 
 @media (max-width: 900px) {
-  .who-layout {
+  .who-layout,
+  .who-layout-simple {
     grid-template-columns: 1fr;
   }
 }
