@@ -103,27 +103,31 @@
               ></video>
             </div>
             <div class="scene-overlay"></div>
-            <div class="scene-content" id="top">
-              <p class="eyebrow"><span class="pulse-dot"></span> UAE · Build · Digital · Shop</p>
-              <h1 class="display">
-                We turn complex projects into
-                <em>precise realities</em>
-              </h1>
-              <p class="body-copy">
-                Shop drawings · aluminium &amp; glass · fitouts · HVAC to G+20 · MEP · fire ·
-                security · IT · 3D — plus the new
-                <strong>Astral shop</strong> for lifestyle gadgets &amp; essentials.
-              </p>
-              <div class="hero-cta-row">
-                <a class="btn btn-primary" href="#shop">Explore the shop</a>
-                <a class="btn btn-ghost" href="quote.html">Project quote</a>
-                <a
-                  class="btn btn-ghost"
-                  href="https://astralae.myshopify.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Open store ↗</a
-                >
+            <div class="scene-content hero-shop-layout" id="top">
+              <div class="hero-shop-copy">
+                <p class="eyebrow"><span class="pulse-dot"></span> Astral shop · Live now</p>
+                <h1 class="display">
+                  Shop the forge.
+                  <em>Build the rest.</em>
+                </h1>
+                <p class="body-copy">
+                  Gadgets &amp; lifestyle essentials first — then scroll for full
+                  engineering: drawings, aluminium &amp; glass, HVAC G+20, MEP, fitout &amp; more.
+                </p>
+                <div class="hero-cta-row">
+                  <a
+                    class="btn btn-primary"
+                    href="https://astralae.myshopify.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Shop all ↗</a
+                  >
+                  <a class="btn btn-ghost" href="#shop">More products</a>
+                  <a class="btn btn-ghost" href="#services">Services ↓</a>
+                </div>
+              </div>
+              <div class="hero-product-cards" id="hero-product-cards" aria-label="Featured products">
+                <div class="hero-cards-loading">Loading shop…</div>
               </div>
             </div>
             <div class="scene-num">00</div>
@@ -458,6 +462,55 @@
       </div>
     </div>
 
+    <!-- Astral Shop — top of page content (after hero story pin) -->
+    <section class="band band-dark shop-band" id="shop">
+      <div class="band-inner">
+        <div class="shop-head">
+          <div>
+            <p class="eyebrow"><span class="pulse-dot"></span> #1 on the page · Astral shop</p>
+            <h2 class="display">
+              Shop first. <span class="gradient-text">Build next.</span>
+            </h2>
+            <p class="body-copy" style="max-width: 36rem">
+              Everyday gear for UAE heat, cars, kitchen &amp; home — then scroll for full
+              engineering services. Secure Shopify checkout. Worldwide shipping.
+            </p>
+          </div>
+          <div class="shop-head-actions">
+            <a
+              class="btn btn-primary"
+              href="https://astralae.myshopify.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Open full store ↗</a
+            >
+            <a
+              class="btn btn-ghost"
+              href="https://astralae.myshopify.com/cart"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View cart</a
+            >
+          </div>
+        </div>
+
+        <div class="shop-grid" id="shop-grid">
+          <p class="shop-loading" id="shop-loading">Loading products from Astral shop…</p>
+        </div>
+
+        <div class="shop-cta-bar">
+          <p>More products update live from the store.</p>
+          <a
+            class="btn btn-primary"
+            href="https://astralae.myshopify.com/collections/all"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Shop all products ↗</a
+          >
+        </div>
+      </div>
+    </section>
+
     <!-- Story stats -->
     <section class="band" id="story">
       <div class="band-inner">
@@ -536,82 +589,6 @@
           <figure class="fitout-shot">
             <img src="assets/images/fitout/fitout-08.jpg" alt="Site fitout photo" loading="lazy" />
           </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- Astral Shop -->
-    <section class="band band-dark shop-band" id="shop">
-      <div class="band-inner">
-        <div class="shop-head">
-          <div>
-            <p class="eyebrow"><span class="pulse-dot"></span> Astral shop · Live</p>
-            <h2 class="display">
-              Products from the <span class="gradient-text">same forge</span>
-            </h2>
-            <p class="body-copy" style="max-width: 36rem">
-              Not only site works — everyday gear for UAE heat, cars, kitchen &amp; home.
-              Secure checkout on Shopify. Worldwide shipping.
-            </p>
-          </div>
-          <div class="shop-head-actions">
-            <a
-              class="btn btn-primary"
-              href="https://astralae.myshopify.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Open full store ↗</a
-            >
-            <a
-              class="btn btn-ghost"
-              href="https://astralae.myshopify.com/cart"
-              target="_blank"
-              rel="noopener noreferrer"
-              >View cart</a
-            >
-          </div>
-        </div>
-
-        <div class="shop-spotlight">
-          <div class="shop-spotlight-copy">
-            <span class="badge">Featured</span>
-            <h3>Hot-weather &amp; lifestyle picks</h3>
-            <p>
-              Neck fans, car sunshades, aroma diffusers, kitchen tools — selected for daily
-              life in the Emirates. Tap any product to buy securely on Shopify.
-            </p>
-            <ul class="shop-perks">
-              <li>Secure Shopify checkout</li>
-              <li>Worldwide shipping · 7–20 business days</li>
-              <li>Tracked when dispatched</li>
-            </ul>
-          </div>
-          <div class="shop-spotlight-visual" aria-hidden="true">
-            <div class="shop-orbit">
-              <span class="shop-orb so1"></span>
-              <span class="shop-orb so2"></span>
-              <span class="shop-orb so3"></span>
-              <div class="shop-orbit-core">
-                <strong>ASTRAL</strong>
-                <span>SHOP</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="shop-grid" id="shop-grid">
-          <p class="shop-loading" id="shop-loading">Loading products from Astral shop…</p>
-        </div>
-
-        <div class="shop-cta-bar">
-          <p>More products update live from the store.</p>
-          <a
-            class="btn btn-primary"
-            href="https://astralae.myshopify.com/collections/all"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Shop all products ↗</a
-          >
         </div>
       </div>
     </section>
