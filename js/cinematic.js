@@ -90,7 +90,7 @@
   ];
 
   const MOBILE_COPY = [
-    { t: "AstralForgeAE", b: "Complex projects → precise realities." },
+    { t: "Astral shop", b: "Shop first — gadgets & lifestyle. Then the full forge story." },
     { t: "Shop drawings", b: "Every build begins as a line." },
     { t: "Aluminium & glass", b: "Facades forged in metal & light." },
     { t: "Interior fitouts", b: "Spaces that feel finished." },
