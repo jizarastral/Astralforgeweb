@@ -105,7 +105,8 @@
     { t: "Sign boards", b: "Identity fixed in steel & light." },
     { t: "IT solutions", b: "Digital systems for real operations." },
     { t: "3D form", b: "to 3D form", s: true },
-    { t: "One forge", b: "Full stack delivery across the UAE." },
+    { t: "Astral shop", b: "Everyday products. Same forge. Instant checkout." },
+    { t: "One forge", b: "Projects on site. Products online." },
   ];
 
   const $ = (s, r = document) => r.querySelector(s);
@@ -310,7 +311,7 @@
       stage.style.transform = `rotateX(${rx * 0.12}deg) rotateY(${ry * 0.12}deg)`;
     });
 
-    $$(".service-card, .process-card, .stat-card, .coming-card").forEach((el, i) => {
+    $$(".service-card, .process-card, .stat-card, .coming-card, .shop-card").forEach((el, i) => {
       gsap.from(el, {
         scrollTrigger: { trigger: el, start: "top 92%" },
         y: 26,
