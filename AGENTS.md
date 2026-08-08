@@ -4,14 +4,16 @@
 
 Static multi-page site for **AstralForgeAE** (UAE).
 
-**Primary business:** fabrication, shop drawings, glass, HVAC (to G+20), 3D printing, custom solutions.  
-**Also offered:** IT & web solutions (sites, support, automation) — additive, not a full rebrand.
+**Primary public brand (homepage):** **AstralForge AI** — AI employees / AI automation for UAE SMBs.  
+Money-first goal: **qualified leads → demos → paid AI automation clients → MRR.**
+
+**Also in repo (legacy / internal):** fabrication, shop drawings, glass, HVAC, fit-out quote tools, IT day rates — do not rebrand the homepage back to fabrication unless the user asks.
 
 - **Live:** https://astralforgeweb.onrender.com  
-- **Clips:** https://astral-clips.onrender.com  
 - **GitHub:** https://github.com/jizarastral/Astralforgeweb  
 - **Deploy:** push `main` → Render auto-deploy  
-- **Stack:** HTML / CSS / JS. Dark navy `#050814`, cyan `#5ee7ff`, Outfit + JetBrains Mono.
+- **Stack:** HTML / CSS / JS. Dark navy `#050814`, cyan `#5ee7ff`, Outfit + JetBrains Mono.  
+- **Homepage styles:** `css/ai-convert.css` · **scripts:** `js/ai-main.js` + `js/lead-router.js`
 
 ## Contacts (all three must stay visible)
 
@@ -28,26 +30,26 @@ Static multi-page site for **AstralForgeAE** (UAE).
 - **Technical** leads → Technical number + **copy to Client happiness** + email  
 - Forms use `js/lead-router.js`
 
-## Services
+## AI products (homepage)
 
-1. Shop drawings  
-2. Advanced glass fabrication  
-3. HVAC installation up to **G+20**  
-4. 3D printing  
-5. **IT & web solutions** (websites, IT support, automation; day rates from **100 AED**)  
-6. Custom solutions  
+1. AI Sales Employee  
+2. AI Customer Service Employee  
+3. AI Booking Employee  
 
-## Technical fit-out quote tool
+Positioning: *AI employees for businesses that never want to miss another customer.*
 
-- **URL:** `/technical/` (e.g. https://astralforgeweb.onrender.com/technical/)  
-- **Access:** Afsal only (username `afsal`). Password hash in `js/technical-auth.js`.  
-- **Public quote form** remains `quote.html` for customers.  
-- Rate book: `js/ratebook.js` (fit-out + painting, Jul 2026 rates).  
-- `noindex` on technical page — do not advertise password in public content.
+## Technical fit-out quote tool (internal)
+
+- **URL:** `/technical/`  
+- **Access:** Afsal only (`js/technical-auth.js`).  
+- Public quote form: `quote.html`  
+- Rate book: `js/ratebook.js`  
+- `noindex` on technical page — do not advertise password.
 
 ## Conventions
 
-- Match existing UI; add services carefully.  
-- Quote form → email + dual WhatsApp.  
+- Homepage = conversion for AI employees (not generic agency fluff).  
+- Primary CTAs: **Get my AI employee** / **Try live demo**.  
+- Quote form / WhatsApp → email + dual WhatsApp via lead-router.  
 - Push `main` after user-facing changes.  
 - Do not invent contacts.  

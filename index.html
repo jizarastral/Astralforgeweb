@@ -1,822 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="AstralForgeAE — Shop drawings, aluminium & glass fabrication, interior fitouts, HVAC G+20, structure, MEP, fire, security, strong rooms, LED, landscaping, signage, IT & 3D printing across the UAE."
-    />
-    <meta name="theme-color" content="#050814" />
-    <meta property="og:title" content="AstralForgeAE | From Drawing to Delivery" />
-    <meta
-      property="og:description"
-      content="Shop drawings · Aluminium & glass fabrication · Fitout · HVAC G+20 · Structure · MEP · Fire · Security · Strong rooms · LED · Landscape · Signage · IT · 3D · UAE"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/images/hero.jpg" />
-    <title>AstralForgeAE | Aluminium · Glass · HVAC · Full Forge · UAE</title>
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Great+Vibes&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/cinematic.css" />
-  </head>
-  <body>
-    <div class="noise" aria-hidden="true"></div>
-    <div class="orb orb-1" aria-hidden="true"></div>
-    <div class="orb orb-2" aria-hidden="true"></div>
-    <div class="orb orb-3" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AstralForge AI — AI employees for UAE businesses. Answer customers, qualify leads, book appointments and automate repetitive work 24/7." />
+  <meta name="theme-color" content="#050814" />
+  <meta property="og:title" content="AstralForge AI | Your Next Employee Could Be AI" />
+  <meta property="og:description" content="Custom AI agents that answer customers, qualify leads and automate repetitive work for UAE businesses." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/images/logo-star.jpg" />
+  <title>AstralForge AI | AI Employees for UAE Businesses</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/ai-convert.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
 
-    <div class="af-loader" id="loader">
-      <div class="af-loader-inner">
-        <img class="af-loader-logo" src="assets/images/logo-star.jpg" alt="AstralForgeAE" width="88" height="88" />
-        <p class="af-loader-title">AstralForge AE</p>
-        <p class="af-loader-sub">From drawing to delivery</p>
-        <div class="af-loader-bar"><span id="loader-fill"></span></div>
-        <p class="af-loader-pct" id="loader-pct">0%</p>
-      </div>
-    </div>
-
-    <header class="af-nav" id="nav">
-      <a class="af-brand" href="#top">
-        <img src="assets/images/logo-star.jpg" alt="" width="42" height="42" />
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand" aria-label="AstralForge AI home">
+        <img src="assets/images/logo-star.jpg" alt="" width="40" height="40" />
         <span>
-          <strong>AstralForge<span class="ae">AE</span></strong>
-          <span class="sub">UAE · Engineering · Build · Digital</span>
+          <strong>AstralForge <span class="ai">AI</span></strong>
+          <span class="sub">UAE · AI Employees</span>
         </span>
       </a>
-      <nav class="af-nav-links" id="navLinks">
-        <a href="#story">Story</a>
-        <a href="#services">Services</a>
-        <a href="#shop">Shop</a>
-        <a href="#process">Process</a>
-        <a href="#astral">Who is Astral</a>
-        <a href="#contact">Contact</a>
-        <a
-          class="btn btn-sm btn-primary"
-          href="https://astralae.myshopify.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Shop Astral</a
-        >
-        <a class="btn btn-sm btn-ghost" href="quote.html">Get a Quote</a>
-        <a
-          class="btn btn-sm btn-whatsapp"
-          href="https://wa.me/971554458850?text=Hello%20AstralForgeAE%20Sales%2C%20I%27d%20like%20a%20quote."
-          data-wa-channel="sales"
-          target="_blank"
-          rel="noopener noreferrer"
-          >WhatsApp</a
-        >
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="#demo">Live demo</a>
+        <a href="#products">AI employees</a>
+        <a href="#how">How it works</a>
+        <a href="#industries">Industries</a>
+        <a class="btn btn-sm btn-ghost" href="#demo">Try live demo</a>
+        <a class="btn btn-sm btn-primary" href="#get-started">Get my AI employee</a>
       </nav>
-    </header>
-
-    <!-- Mobile story -->
-    <div class="mobile-exp" id="mobile-exp" hidden>
-      <div class="mobile-track" id="mobile-track"></div>
-      <div class="mobile-ui">
-        <button type="button" class="mobile-btn" id="m-prev" aria-label="Previous">‹</button>
-        <div class="mobile-dots" id="m-dots"></div>
-        <button type="button" class="mobile-btn" id="m-next" aria-label="Next">›</button>
-      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" type="button">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
 
-    <!-- Desktop cinematic -->
-    <div class="cinematic" id="cinematic">
-      <div class="pin-wrap" id="pin-wrap">
-        <div class="stage" id="stage">
-          <!-- 00 Hero -->
-          <div class="scene is-active" data-i="0">
-            <div class="scene-media">
-              <video
-                src="assets/video/hero-fabrication.mp4"
-                poster="assets/images/hero.jpg"
-                muted
-                playsinline
-                loop
-                autoplay
-                preload="auto"
-              ></video>
-            </div>
-            <div class="scene-overlay"></div>
-            <div class="scene-content hero-shop-layout" id="top">
-              <div class="hero-shop-copy">
-                <p class="eyebrow"><span class="pulse-dot"></span> Astral shop · Live now</p>
-                <h1 class="display">
-                  Shop the forge.
-                  <em>Build the rest.</em>
-                </h1>
-                <p class="body-copy">
-                  Gadgets &amp; lifestyle essentials first — then scroll for full
-                  engineering: drawings, aluminium &amp; glass, HVAC G+20, MEP, fitout &amp; more.
-                </p>
-                <div class="hero-cta-row">
-                  <a
-                    class="btn btn-primary"
-                    href="https://astralae.myshopify.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Shop all ↗</a
-                  >
-                  <a class="btn btn-ghost" href="#shop">More products</a>
-                  <a class="btn btn-ghost" href="#services">Services ↓</a>
-                </div>
-              </div>
-              <div class="hero-product-cards" id="hero-product-cards" aria-label="Featured products">
-                <div class="hero-cards-loading">Loading shop…</div>
-              </div>
-            </div>
-            <div class="scene-num">00</div>
-          </div>
-
-          <!-- 01 Drawing -->
-          <div class="scene" data-i="1">
-            <div class="scene-media">
-              <img src="assets/images/services/drawings.jpg" alt="Shop drawings and design" />
-              <div class="scene-blueprint"></div>
-            </div>
-            <div class="scene-overlay o-mid"></div>
-            <div class="scene-content">
-              <p class="eyebrow">01 · Drawing</p>
-              <h2 class="display">Every build begins as a line</h2>
-              <p class="body-copy">
-                Shop drawings, coordination plans, and fabrication packages — clarity
-                before steel, glass, or copper ever moves.
-              </p>
-            </div>
-            <div class="scene-num">01</div>
-          </div>
-
-          <!-- 02 Aluminium & Glass fabrication (core — from original site) -->
-          <div class="scene" data-i="2">
-            <div class="scene-media">
-              <img
-                src="assets/images/service-glass.jpg"
-                alt="Aluminium and architectural glass fabrication"
-              />
-            </div>
-            <div class="scene-overlay o-deep"></div>
-            <div class="scene-content">
-              <p class="eyebrow">02 · Aluminium &amp; glass fabrication</p>
-              <h2 class="display">Facades forged in metal &amp; light</h2>
-              <p class="body-copy">
-                Curtain walls, windows, doors, spider glazing, and aluminium systems —
-                advanced fabrication for architecture that has to perform in the UAE
-                climate.
-              </p>
-            </div>
-            <div class="scene-num">02</div>
-          </div>
-
-          <!-- 03 Fitout — FNE-NE AsBuilt interiors -->
-          <div class="scene" data-i="3">
-            <div class="scene-media">
-              <img
-                src="assets/images/fitout/fitout-01.jpg"
-                alt="Interior fitout — AsBuilt project photo"
-              />
-            </div>
-            <div class="scene-overlay o-mid"></div>
-            <div class="scene-content">
-              <p class="eyebrow">03 · Interior fitouts</p>
-              <h2 class="display">Spaces that feel finished</h2>
-              <p class="body-copy">
-                Real AsBuilt interiors — partitions, finishes, and premium spaces that
-                respect architecture and programme.
-              </p>
-            </div>
-            <div class="scene-num">03</div>
-          </div>
-
-          <!-- 04 HVAC -->
-          <div class="scene" data-i="4">
-            <div class="scene-media">
-              <img src="assets/images/services/hvac.jpg" alt="HVAC installation" />
-            </div>
-            <div class="scene-overlay o-deep"></div>
-            <div class="scene-content">
-              <p class="eyebrow">04 · HVAC</p>
-              <h2 class="display">Climate engineered to G+20</h2>
-              <p class="body-copy">
-                Chillers, FCUs, VRF, ducting and commissioning — comfort systems that
-                perform on day one and through peak UAE summers.
-              </p>
-            </div>
-            <div class="scene-num">04</div>
-          </div>
-
-          <!-- 05 Structuring -->
-          <div class="scene" data-i="5">
-            <div class="scene-media">
-              <img src="assets/images/services/structure.jpg" alt="Structure and framing" />
-            </div>
-            <div class="scene-overlay o-mid"></div>
-            <div class="scene-content center">
-              <p class="script-line">From <span class="script">structure</span></p>
-              <p class="body-copy">
-                Framing intent, interfaces, and buildable detailing so architecture
-                stands with confidence.
-              </p>
-            </div>
-            <div class="scene-num">05</div>
-          </div>
-
-          <!-- 06 MEP -->
-          <div class="scene" data-i="6">
-            <div class="scene-media">
-              <img
-                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1920&q=80"
-                alt="MEP plant and systems"
-              />
-            </div>
-            <div class="scene-overlay o-deep"></div>
-            <div class="scene-content">
-              <p class="eyebrow">06 · MEP</p>
-              <h2 class="display">Mechanical · Electrical · Plumbing</h2>
-              <p class="body-copy">
-                Integrated MEP delivery — coordinated routes, load paths, and
-                installation that speaks the same language as the drawings.
-              </p>
-            </div>
-            <div class="scene-num">06</div>
-          </div>
-
-          <!-- 07 Fire -->
-          <div class="scene" data-i="7">
-            <div class="scene-media">
-              <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80"
-                alt="Fire protection systems"
-              />
-            </div>
-            <div class="scene-overlay o-mid"></div>
-            <div class="scene-content">
-              <p class="eyebrow">07 · Fire systems</p>
-              <h2 class="display">Protection that is non-negotiable</h2>
-              <p class="body-copy">
-                Detection, suppression, alarms, and life-safety coordination — systems
-                designed to meet code and keep people safe.
-              </p>
-            </div>
-            <div class="scene-num">07</div>
-          </div>
-
-          <!-- 08 Security -->
-          <div class="scene" data-i="8">
-            <div class="scene-media">
-              <img
-                src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1920&q=80"
-                alt="Security and surveillance"
-              />
-            </div>
-            <div class="scene-overlay o-deep"></div>
-            <div class="scene-content">
-              <p class="eyebrow">08 · Security &amp; surveillance</p>
-              <h2 class="display">Eyes on every critical edge</h2>
-              <p class="body-copy">
-                CCTV, access control, intrusion — layered security that protects assets,
-                people, and operations across the site.
-              </p>
-            </div>
-            <div class="scene-num">08</div>
-          </div>
-
-          <!-- 09 Strong room -->
-          <div class="scene" data-i="9">
-            <div class="scene-media">
-              <img
-                src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1920&q=80"
-                alt="Secure strong room concept"
-              />
-            </div>
-            <div class="scene-overlay o-mid"></div>
-            <div class="scene-content center">
-              <p class="script-line">to <span class="script">strong rooms</span></p>
-              <p class="body-copy">
-                High-security enclosures, vault-grade detailing, and controlled access —
-                when the brief demands zero compromise.
-              </p>
-            </div>
-            <div class="scene-num">09</div>
-          </div>
-
-          <!-- 10 LED -->
-          <div class="scene" data-i="10">
-            <div class="scene-media">
-              <img
-                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1920&q=80"
-                alt="LED display and media facade"
-              />
-            </div>
-            <div class="scene-overlay o-deep"></div>
-            <div class="scene-content">
-              <p class="eyebrow">10 · LED display</p>
-              <h2 class="display">Facades that speak in light</h2>
-              <p class="body-copy">
-                LED screens, media walls, and display systems — installation and
-                integration for brands that need to be seen.
-              </p>
-            </div>
-            <div class="scene-num">10</div>
-          </div>
-
-          <!-- 11 Landscaping -->
-          <div class="scene" data-i="11">
-            <div class="scene-media">
-              <img
-                src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1920&q=80"
-                alt="Landscaping and outdoor spaces"
-              />
-            </div>
-            <div class="scene-overlay o-mid"></div>
-            <div class="scene-content">
-              <p class="eyebrow">11 · Landscaping</p>
-              <h2 class="display">Grounds that complete the project</h2>
-              <p class="body-copy">
-                Outdoor works, softscape interfaces, and site finishing that tie
-                architecture to the land it sits on.
-              </p>
-            </div>
-            <div class="scene-num">11</div>
-          </div>
-
-          <!-- 12 Advertising / sign boards -->
-          <div class="scene" data-i="12">
-            <div class="scene-media">
-              <img
-                src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1920&q=80"
-                alt="Advertising and sign boards"
-              />
-            </div>
-            <div class="scene-overlay o-deep"></div>
-            <div class="scene-content">
-              <p class="eyebrow">12 · Advertising &amp; sign boards</p>
-              <h2 class="display">Identity fixed in steel &amp; light</h2>
-              <p class="body-copy">
-                Signage, wayfinding, and advertising structures — fabricated and
-                installed to brand standards across UAE sites.
-              </p>
-            </div>
-            <div class="scene-num">12</div>
-          </div>
-
-          <!-- 13 IT -->
-          <div class="scene" data-i="13">
-            <div class="scene-media">
-              <img src="assets/images/services/it.jpg" alt="IT solutions" />
-            </div>
-            <div class="scene-overlay o-mid"></div>
-            <div class="scene-content">
-              <p class="eyebrow">13 · IT solutions</p>
-              <h2 class="display">Digital systems for real operations</h2>
-              <p class="body-copy">
-                Web platforms, portals, automation, and support — the same precision we
-                bring to site work, applied to software and networks.
-              </p>
-            </div>
-            <div class="scene-num">13</div>
-          </div>
-
-          <!-- 14 3D printing -->
-          <div class="scene" data-i="14">
-            <div class="scene-media">
-              <img src="assets/images/services/print3d.jpg" alt="3D printing" />
-            </div>
-            <div class="scene-overlay o-deep"></div>
-            <div class="scene-content center">
-              <p class="script-line">to <span class="script">3D form</span></p>
-              <p class="body-copy">
-                Prototypes, mock-ups, and custom parts — additive manufacturing that
-                accelerates decisions before full production.
-              </p>
-            </div>
-            <div class="scene-num">14</div>
-          </div>
-
-          <!-- 15 Shop -->
-          <div class="scene" data-i="15">
-            <div class="scene-media">
-              <img
-                src="https://cdn.shopify.com/s/files/1/0841/2354/9940/files/portable-foldable-neck-fan.jpg?v=1784542475"
-                alt="Astral shop products"
-              />
-            </div>
-            <div class="scene-overlay o-deep"></div>
-            <div class="scene-content">
-              <p class="eyebrow">15 · Astral shop</p>
-              <h2 class="display">Forge the everyday</h2>
-              <p class="body-copy">
-                Beyond site works — curated gadgets, car, kitchen &amp; home essentials.
-                Same brand. Instant checkout. Ships worldwide.
-              </p>
-              <div class="hero-cta-row">
-                <a class="btn btn-primary" href="#shop">Browse products</a>
-                <a
-                  class="btn btn-ghost"
-                  href="https://astralae.myshopify.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Full store ↗</a
-                >
-              </div>
-            </div>
-            <div class="scene-num">15</div>
-          </div>
-
-          <!-- 16 Loop / delivery -->
-          <div class="scene" data-i="16">
-            <div class="scene-media">
-              <video
-                src="assets/video/hero-fabrication.mp4"
-                poster="assets/images/hero.jpg"
-                muted
-                playsinline
-                loop
-                preload="metadata"
-              ></video>
-            </div>
-            <div class="scene-overlay"></div>
-            <div class="scene-content center">
-              <p class="eyebrow">Delivery</p>
-              <h2 class="display">One forge. Full stack.</h2>
-              <p class="body-copy">
-                Projects on site. Products online. From aluminium façades and HVAC to the
-                Astral shop — built for the Emirates and beyond.
-              </p>
-              <div class="hero-cta-row">
-                <a class="btn btn-primary" href="#shop">Shop now</a>
-                <a class="btn btn-ghost" href="#contact">Start a project</a>
-              </div>
-            </div>
-            <div class="scene-num">16</div>
-          </div>
-        </div>
-        <div class="scroll-indicator" id="scroll-indicator">
-          <span>Scroll the full story</span>
-          <div class="arrow-down"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Astral Shop — top of page content (after hero story pin) -->
-    <section class="band band-dark shop-band" id="shop">
-      <div class="band-inner">
-        <div class="shop-head">
-          <div>
-            <p class="eyebrow"><span class="pulse-dot"></span> #1 on the page · Astral shop</p>
-            <h2 class="display">
-              Shop first. <span class="gradient-text">Build next.</span>
-            </h2>
-            <p class="body-copy" style="max-width: 36rem">
-              Everyday gear for UAE heat, cars, kitchen &amp; home — then scroll for full
-              engineering services. Secure Shopify checkout. Worldwide shipping.
-            </p>
-          </div>
-          <div class="shop-head-actions">
-            <a
-              class="btn btn-primary"
-              href="https://astralae.myshopify.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Open full store ↗</a
-            >
-            <a
-              class="btn btn-ghost"
-              href="https://astralae.myshopify.com/cart"
-              target="_blank"
-              rel="noopener noreferrer"
-              >View cart</a
-            >
-          </div>
-        </div>
-
-        <div class="shop-grid" id="shop-grid">
-          <p class="shop-loading" id="shop-loading">Loading products from Astral shop…</p>
-        </div>
-
-        <div class="shop-cta-bar">
-          <p>More products update live from the store.</p>
-          <a
-            class="btn btn-primary"
-            href="https://astralae.myshopify.com/collections/all"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Shop all products ↗</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <!-- Story stats -->
-    <section class="band" id="story">
-      <div class="band-inner">
-        <p class="eyebrow">The story</p>
-        <h2 class="display">
-          A journey <span class="gradient-text">never told this way</span>
-        </h2>
-        <p class="body-copy" style="max-width: 40rem">
-          Seventeen scenes. One continuous narrative — shop drawings, aluminium &amp; glass
-          fabrication, fitout, HVAC to G+20, structure, MEP, fire, security, strong rooms,
-          LED, landscape, signage, IT, 3D, and the new Astral shop — built for multi-discipline
-          partners and everyday customers in the UAE.
-        </p>
-        <div class="stats-row">
-          <div class="stat-card">
-            <span class="stat-value">14+</span>
-            <span class="stat-label">Service lines</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-value">G+20</span>
-            <span class="stat-label">HVAC capability</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-value">Shop</span>
-            <span class="stat-label">Live on Shopify</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-value">1</span>
-            <span class="stat-label">Integrated forge</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Full services -->
-    <section class="band band-alt" id="services">
-      <div class="band-inner">
-        <p class="eyebrow">What we deliver</p>
-        <h2 class="display">Full service catalogue</h2>
-        <p class="body-copy">Every discipline in the story — detailed for tenders and site reality.</p>
-        <div class="service-grid" id="service-grid"></div>
-      </div>
-    </section>
-
-    <!-- Interior fitout gallery — FNE-NE AsBuilt -->
-    <section class="band" id="fitout-gallery">
-      <div class="band-inner">
-        <p class="eyebrow">Interior fitouts · AsBuilt</p>
-        <h2 class="display">Real spaces. <span class="gradient-text">Real work.</span></h2>
-        <p class="body-copy" style="max-width: 40rem">
-          Project photography from FNE-NE AsBuilt interiors and related finishes — the standard we
-          aim for on residential and commercial fitout packages.
-        </p>
-        <div class="fitout-gallery" id="fitout-gallery-grid">
-          <figure class="fitout-shot">
-            <img src="assets/images/fitout/fitout-01.jpg" alt="Interior view 1" loading="lazy" />
-          </figure>
-          <figure class="fitout-shot">
-            <img src="assets/images/fitout/fitout-02.jpg" alt="Interior view 2" loading="lazy" />
-          </figure>
-          <figure class="fitout-shot">
-            <img src="assets/images/fitout/fitout-03.jpg" alt="Interior view 3" loading="lazy" />
-          </figure>
-          <figure class="fitout-shot">
-            <img src="assets/images/fitout/fitout-04.jpg" alt="Exterior / finish option" loading="lazy" />
-          </figure>
-          <figure class="fitout-shot">
-            <img src="assets/images/fitout/fitout-05.jpg" alt="3D image work" loading="lazy" />
-          </figure>
-          <figure class="fitout-shot">
-            <img src="assets/images/fitout/fitout-06.jpg" alt="Site fitout photo" loading="lazy" />
-          </figure>
-          <figure class="fitout-shot">
-            <img src="assets/images/fitout/fitout-07.jpg" alt="Site fitout photo" loading="lazy" />
-          </figure>
-          <figure class="fitout-shot">
-            <img src="assets/images/fitout/fitout-08.jpg" alt="Site fitout photo" loading="lazy" />
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- Coming soon: Legal -->
-    <section class="band" id="coming">
-      <div class="band-inner">
-        <p class="eyebrow">Roadmap</p>
-        <h2 class="display">Coming soon</h2>
-        <div class="coming-grid">
-          <div class="coming-card">
-            <div>
-              <span class="badge">Live now</span>
-              <h3>Astral shop</h3>
-              <p>
-                Lifestyle &amp; gadget store is open —
-                <a href="https://astralae.myshopify.com/" target="_blank" rel="noopener noreferrer" style="color: var(--cyan)"
-                  >astralae.myshopify.com</a
-                >
-                — also featured above.
-              </p>
-            </div>
-            <a class="btn btn-primary" href="#shop">View shop</a>
-          </div>
-          <div class="coming-card">
-            <div>
-              <span class="badge">New division</span>
-              <h3>Legal advice</h3>
-              <p>
-                Contract clarity and project documentation support for developers and
-                contractors. Join the waitlist via contact.
-              </p>
-            </div>
-            <a class="btn btn-ghost" href="#contact">Notify me</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Process -->
-    <section class="band" id="process">
-      <div class="band-inner">
-        <p class="eyebrow">How we work</p>
-        <h2 class="display">From brief to handover</h2>
-        <div class="process-grid">
-          <article class="process-card">
-            <span class="n">01</span>
-            <h3>Discover</h3>
-            <p>Site, scope, codes, and constraints — we listen before we draw.</p>
-          </article>
-          <article class="process-card">
-            <span class="n">02</span>
-            <h3>Engineer</h3>
-            <p>Drawings, packages, and coordination across disciplines.</p>
-          </article>
-          <article class="process-card">
-            <span class="n">03</span>
-            <h3>Build</h3>
-            <p>Fabrication, install, MEP, life-safety, and digital systems.</p>
-          </article>
-          <article class="process-card">
-            <span class="n">04</span>
-            <h3>Deliver</h3>
-            <p>Commissioning, documentation, and support that lasts.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Who is Astral → Astral Gamer (link below) -->
-    <section class="band band-dark" id="astral">
-      <div class="band-inner">
-        <p class="eyebrow">The person behind the forge</p>
-        <h2 class="display">Who is <span class="gradient-text">Astral</span>?</h2>
-        <div class="who-layout who-layout-simple">
-          <div class="who-portrait">
-            <img src="assets/images/logo-star.jpg" alt="AstralForge mark" width="120" height="120" />
-          </div>
-          <div class="who-copy">
-            <p class="body-copy" style="max-width: none; color: var(--text-muted); text-shadow: none">
-              <strong style="color: var(--text)">Astral</strong> is the creator and operator behind
-              <strong style="color: var(--text)">AstralForgeAE</strong> — this main UAE business site
-              for shop drawings, aluminium &amp; glass fabrication, fitout, HVAC G+20, structure, MEP,
-              fire, security, strong rooms, LED, landscape, signage, IT, and 3D.
-            </p>
-            <p class="body-copy" style="max-width: none; color: var(--text-muted); text-shadow: none">
-              The same person also runs
-              <strong style="color: var(--cyan)">Astral Gamer</strong> — gaming, content, clips, and
-              creator tools.
-            </p>
-            <ul class="who-list">
-              <li>
-                <strong>AstralForgeAE</strong> — this site · engineering &amp; build
-                <em>(main website)</em>
-              </li>
-              <li>
-                <strong>Astral Gamer</strong> — creator website (link below)
-              </li>
-              <li>
-                <strong>Astral Clips</strong> —
-                <a href="https://astral-clips.onrender.com/" target="_blank" rel="noopener noreferrer"
-                  >short-form video desk</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="who-gamer-link">
-          <p class="who-note" style="margin-bottom: 0.85rem">
-            Explore the creator side of Astral — gaming, clips, and tools.
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow reveal"><span class="dot"></span> AI employees for UAE businesses</p>
+          <h1 class="reveal d1">YOUR NEXT EMPLOYEE COULD BE <span class="grad">AI.</span></h1>
+          <p class="hero-lead reveal d2">
+            AI employees that answer customers, qualify leads and automate repetitive work — 24/7.
           </p>
-          <a
-            class="btn btn-primary"
-            href="https://astralgamer.onrender.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visit Astral Gamer →
-          </a>
+          <p class="hero-sub reveal d2">
+            AstralForge builds custom AI agents for UAE businesses and deploys them around your actual services, FAQs and workflows.
+          </p>
+          <div class="hero-cta reveal d3">
+            <a class="btn btn-primary" href="#get-started">Get my AI employee</a>
+            <a class="btn btn-ghost" href="#demo">Try live demo</a>
+          </div>
+          <p class="trust-line reveal d3">
+            <span>Built for UAE businesses</span>
+            <span>Custom trained on your business information</span>
+            <span>Human handoff available</span>
+          </p>
+        </div>
+
+        <div class="flow-card reveal d2" aria-label="Lead flow">
+          <p class="flow-title">From customer message → qualified lead</p>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-icon">01</div>
+              <div>
+                <strong>Customer message</strong>
+                <p>WhatsApp, website chat or form — any hour of the day.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-icon">02</div>
+              <div>
+                <strong>AI employee</strong>
+                <p>Responds instantly in your brand voice and process.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-icon">03</div>
+              <div>
+                <strong>Understands request</strong>
+                <p>Maps intent to your services, FAQs and policies.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-icon">04</div>
+              <div>
+                <strong>Qualifies customer</strong>
+                <p>Collects name, phone, needs, urgency and fit.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-icon">05</div>
+              <div>
+                <strong>You receive the lead</strong>
+                <p>Qualified handoff to your team — ready to close.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section class="band band-alt" id="contact">
-      <div class="band-inner">
-        <p class="eyebrow">Begin</p>
-        <h2 class="display">Start your project</h2>
-        <div class="contact-grid">
-          <form class="contact-form" id="contact-form">
-            <label
-              >Name
-              <input type="text" name="name" required placeholder="Your name" />
-            </label>
-            <label
-              >Email
-              <input type="email" name="email" required placeholder="you@company.com" />
-            </label>
-            <label
-              >Phone / WhatsApp
-              <input type="tel" name="phone" placeholder="+971 …" />
-            </label>
-            <label
-              >Interest
-              <select name="interest">
-                <option value="drawings">Shop drawings</option>
-                <option value="aluminium-glass">Aluminium &amp; glass fabrication</option>
-                <option value="fitout">Interior fitouts</option>
-                <option value="hvac">HVAC (G+20)</option>
-                <option value="structure">Structuring</option>
-                <option value="mep">MEP</option>
-                <option value="fire">Fire systems</option>
-                <option value="security">Security &amp; surveillance</option>
-                <option value="strong-room">Strong room</option>
-                <option value="led">LED display</option>
-                <option value="landscape">Landscaping</option>
-                <option value="signage">Advertising &amp; sign boards</option>
-                <option value="it">IT solutions</option>
-                <option value="3d">3D printing</option>
-                <option value="shop">Astral shop / product order</option>
-                <option value="legal">Legal advice (coming soon)</option>
-                <option value="multi">Multi-discipline package</option>
-              </select>
-            </label>
-            <label
-              >Message
-              <textarea name="message" rows="4" placeholder="Project location, timeline, scope…"></textarea>
-            </label>
-            <button type="submit" class="btn btn-primary">Send via WhatsApp + Email</button>
-          </form>
-          <aside class="contact-side">
-            <h3>Direct lines</h3>
-            <a href="mailto:astralfconsulting@gmail.com">astralfconsulting@gmail.com</a>
-            <a href="https://wa.me/971554458850" data-wa-channel="sales" target="_blank" rel="noopener"
-              >Sales · +971 55 445 8850</a
-            >
-            <a href="https://wa.me/971508364246" data-wa-channel="technical" target="_blank" rel="noopener"
-              >Technical · +971 50 836 4246</a
-            >
-            <a href="https://wa.me/971505804276" target="_blank" rel="noopener"
-              >Client happiness · +971 50 580 4276</a
-            >
-            <p style="margin-top: 1.25rem">
-              Prefer a structured quote?
-              <a href="quote.html" style="color: var(--cyan)">Open quote form →</a>
-            </p>
-            <p>
-              Technical team portal:
-              <a href="technical/" style="color: var(--cyan)">/technical</a>
-            </p>
-            <p>
-              Astral shop:
-              <a href="https://astralae.myshopify.com/" target="_blank" rel="noopener noreferrer" style="color: var(--cyan)"
-                >astralae.myshopify.com ↗</a
-              >
-            </p>
+    <!-- INTERACTIVE DEMO -->
+    <section class="section section-alt" id="demo">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow"><span class="dot"></span> Interactive demo</p>
+          <h2>SEE WHAT YOUR AI EMPLOYEE CAN DO</h2>
+          <p>Choose a role and watch a real conversation style your customers could experience.</p>
+        </div>
+
+        <div class="demo-panel reveal d1">
+          <aside class="demo-side">
+            <p class="eyebrow">Choose role</p>
+            <h3>AI employee type</h3>
+            <div class="demo-tabs" role="tablist" aria-label="Demo role">
+              <button type="button" class="demo-tab active" data-demo="sales" role="tab" aria-selected="true">Sales</button>
+              <button type="button" class="demo-tab" data-demo="support" role="tab" aria-selected="false">Customer support</button>
+              <button type="button" class="demo-tab" data-demo="booking" role="tab" aria-selected="false">Booking</button>
+            </div>
           </aside>
+
+          <div class="demo-chat">
+            <div class="demo-chat-head">
+              <div class="demo-status"><i></i> <span id="demoRoleLabel">AI Sales Employee · Online</span></div>
+              <span class="mono" style="font-size:0.72rem;color:var(--muted)">LIVE SIMULATION</span>
+            </div>
+            <div class="demo-messages" id="demoMessages" aria-live="polite"></div>
+            <div class="demo-foot">
+              <div>
+                <p>This is what your customers could experience on your website.</p>
+                <div class="demo-actions" id="demoChips" style="margin-top:10px"></div>
+              </div>
+              <a class="btn btn-primary" href="#get-started">Build this for my business</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <img src="assets/images/logo-star.jpg" alt="" width="32" height="32" />
-          <span>AstralForge<span style="color: var(--cyan)">AE</span></span>
+    <!-- PAIN -->
+    <section class="section" id="pain">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow"><span class="dot"></span> The cost of silence</p>
+          <h2>HOW MANY CUSTOMERS ARE YOU LOSING WITHOUT REALIZING IT?</h2>
+          <p>Every unanswered message is a competitor’s opportunity.</p>
         </div>
-        <p>
-        Main site ·
-        <a href="https://astralgamer.onrender.com/" target="_blank" rel="noopener" style="color: var(--cyan)"
-          >Astral Gamer</a
-        >
-        · Drawing through 3D
-      </p>
-        <p>© <span id="year"></span> AstralForgeAE · UAE</p>
+        <div class="pain-grid">
+          <article class="pain-card reveal">
+            <p class="tag">MISS</p>
+            <h3>Missed inquiries</h3>
+            <p>Messages after hours, weekends and peak rush times never get a fair chance.</p>
+            <p class="story">Customer asks at 11:30 PM. Nobody answers. They contact a competitor.</p>
+          </article>
+          <article class="pain-card reveal d1">
+            <p class="tag">SLOW</p>
+            <h3>Slow response</h3>
+            <p>Buyers want answers now. Hours later, the lead is cold — or already gone.</p>
+            <p class="story">Customer wants a price now. Your team replies after lunch. Lead is cold.</p>
+          </article>
+          <article class="pain-card reveal d2">
+            <p class="tag">REPEAT</p>
+            <h3>Repetitive work</h3>
+            <p>Staff answer the same WhatsApp questions every day instead of closing deals.</p>
+            <p class="story">“What are your hours?” “Do you cover Dubai?” “How much for…?” — again and again.</p>
+          </article>
+          <article class="pain-card reveal">
+            <p class="tag">LEADS</p>
+            <h3>Leads disappearing</h3>
+            <p>Price-shoppers vanish when no one qualifies them or books a next step.</p>
+            <p class="story">They asked for a quote, left a number — and never got a structured follow-up.</p>
+          </article>
+          <article class="pain-card reveal d1">
+            <p class="tag">BOOKINGS</p>
+            <h3>Missed appointments</h3>
+            <p>Booking intent dies in chat threads when nobody collects date, time and service.</p>
+            <p class="story">“Can I come Thursday?” — message sits unread while the calendar stays empty.</p>
+          </article>
+          <article class="pain-card reveal d2">
+            <p class="tag">OWNER</p>
+            <h3>Owner as the inbox</h3>
+            <p>Business owners personally handle routine questions that an AI employee could own.</p>
+            <p class="story">You’re the bottleneck — and your highest-cost “customer service agent.”</p>
+          </article>
+        </div>
       </div>
-    </footer>
+    </section>
 
-    <div class="progress-wrap" aria-hidden="true">
-      <div class="progress-bar" id="progress-bar"></div>
+    <!-- PRODUCTS -->
+    <section class="section section-alt" id="products">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow"><span class="dot"></span> Productized AI employees</p>
+          <h2>MEET YOUR AI EMPLOYEE</h2>
+          <p>Three deployable roles — built around your real services, FAQs and workflows.</p>
+        </div>
+        <div class="product-grid">
+          <article class="product-card reveal">
+            <span class="num">PRODUCT 01</span>
+            <h3>AI Sales Employee</h3>
+            <p>For businesses that receive inquiries and cannot afford to miss them.</p>
+            <ul>
+              <li>Answers customer questions</li>
+              <li>Explains your services</li>
+              <li>Qualifies prospects</li>
+              <li>Collects name, phone &amp; email</li>
+              <li>Identifies requirements &amp; urgency</li>
+              <li>Sends qualified leads to you</li>
+              <li>Escalates complex chats to humans</li>
+            </ul>
+            <p class="outcome">Outcome: more qualified leads without hiring another employee.</p>
+            <a class="btn btn-primary btn-block" href="#get-started" data-product="AI Sales Employee">Get this AI employee</a>
+          </article>
+          <article class="product-card reveal d1">
+            <span class="num">PRODUCT 02</span>
+            <h3>AI Customer Service Employee</h3>
+            <p>For teams buried in FAQs and repetitive support questions.</p>
+            <ul>
+              <li>Answers FAQs 24/7</li>
+              <li>Explains services &amp; policies</li>
+              <li>Provides business information</li>
+              <li>Handles repetitive questions</li>
+              <li>Reduces staff workload</li>
+              <li>Escalates difficult cases</li>
+            </ul>
+            <p class="outcome">Outcome: 24/7 support without adding another full-time employee.</p>
+            <a class="btn btn-primary btn-block" href="#get-started" data-product="AI Customer Service Employee">Get this AI employee</a>
+          </article>
+          <article class="product-card reveal d2">
+            <span class="num">PRODUCT 03</span>
+            <h3>AI Booking Employee</h3>
+            <p>For service businesses that turn conversations into appointments.</p>
+            <ul>
+              <li>Receives booking requests</li>
+              <li>Collects customer information</li>
+              <li>Determines requested service</li>
+              <li>Collects preferred date/time</li>
+              <li>Confirms requirements</li>
+              <li>Passes bookings to staff</li>
+            </ul>
+            <p class="outcome">Outcome: turn conversations into appointments.</p>
+            <a class="btn btn-primary btn-block" href="#get-started" data-product="AI Booking Employee">Get this AI employee</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow"><span class="dot"></span> Deployment system</p>
+          <h2>FROM YOUR BUSINESS KNOWLEDGE TO A LIVE AI EMPLOYEE</h2>
+          <p>We do not drop a generic chatbot. We build a digital employee around your operation.</p>
+        </div>
+        <div class="process-track">
+          <article class="process-step reveal">
+            <p class="n">01 — LEARN</p>
+            <h3>Learn</h3>
+            <p>We train on your services, FAQs, pricing rules, policies, info and operating procedures.</p>
+          </article>
+          <article class="process-step reveal d1">
+            <p class="n">02 — UNDERSTAND</p>
+            <h3>Understand</h3>
+            <p>The AI learns how to handle your common customer conversations end-to-end.</p>
+          </article>
+          <article class="process-step reveal d2">
+            <p class="n">03 — DEPLOY</p>
+            <h3>Deploy</h3>
+            <p>Go live on your website and selected communication channels.</p>
+          </article>
+          <article class="process-step reveal d3">
+            <p class="n">04 — HAND OFF</p>
+            <h3>Hand off</h3>
+            <p>When a human is needed, the AI escalates with full context.</p>
+          </article>
+          <article class="process-step reveal">
+            <p class="n">05 — IMPROVE</p>
+            <h3>Improve</h3>
+            <p>Review conversations and continuously sharpen performance.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <section class="section section-alt" id="industries">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow"><span class="dot"></span> UAE verticals</p>
+          <h2>BUILT FOR REAL BUSINESSES</h2>
+          <p>If customers message you every day, an AI employee can work for you.</p>
+        </div>
+        <div class="industry-grid">
+          <article class="industry-card reveal"><h3>HVAC &amp; AC services</h3><p>Qualifies service requests and collects property / unit details.</p></article>
+          <article class="industry-card reveal d1"><h3>Automotive</h3><p>Handles service inquiries, booking requests and common questions.</p></article>
+          <article class="industry-card reveal d2"><h3>Real estate</h3><p>Qualifies property inquiries and captures buyer/renter requirements.</p></article>
+          <article class="industry-card reveal d3"><h3>Cleaning services</h3><p>Collects property size, service type and preferred schedule.</p></article>
+          <article class="industry-card reveal"><h3>Salons &amp; beauty</h3><p>Service questions and booking requests, ready for your calendar.</p></article>
+          <article class="industry-card reveal d1"><h3>Clinics</h3><p>General info &amp; appointment inquiries — never medical diagnosis.</p></article>
+          <article class="industry-card reveal d2"><h3>Logistics</h3><p>Collects shipment requirements and forwards qualified enquiries.</p></article>
+          <article class="industry-card reveal d3"><h3>Home services</h3><p>Plumbing, electrical, maintenance and repair qualification.</p></article>
+        </div>
+        <div style="margin-top:28px" class="reveal">
+          <a class="btn btn-ghost" href="#get-started" id="otherIndustryCta" data-product="Custom industry AI employee">I don’t see my industry</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA / LEAD FORM -->
+    <section class="section" id="get-started">
+      <div class="container">
+        <div class="lead-panel reveal">
+          <div class="copy">
+            <p class="eyebrow"><span class="dot"></span> Book a demo</p>
+            <h2>Get your AI employee working for your business</h2>
+            <p>
+              Tell us what you sell and where customers message you. We’ll show you a tailored AI employee plan for UAE operations.
+            </p>
+            <p class="muted" style="font-size:0.9rem">
+              Primary objective: qualified leads → demos → paid AI automation clients → monthly recurring revenue.
+            </p>
+            <div class="contact-mini">
+              <a href="https://wa.me/971554458850?text=Hello%20AstralForge%20AI%20Sales%2C%20I%20want%20an%20AI%20employee%20for%20my%20business." data-wa-channel="sales" target="_blank" rel="noopener noreferrer">
+                <span><span class="role">Sales</span><br /><span class="num">+971 55 445 8850</span></span>
+                <span class="muted">WhatsApp →</span>
+              </a>
+              <a href="https://wa.me/971508364246?text=Hello%20AstralForge%20AI%20Technical%2C%20I%20need%20support." data-wa-channel="technical" target="_blank" rel="noopener noreferrer">
+                <span><span class="role">Technical</span><br /><span class="num">+971 50 836 4246</span></span>
+                <span class="muted">WhatsApp →</span>
+              </a>
+              <a href="https://wa.me/971505804276?text=Hello%20AstralForge%20AI%2C%20I%20have%20a%20client%20happiness%20request." data-wa-channel="sales" target="_blank" rel="noopener noreferrer">
+                <span><span class="role">Client happiness</span><br /><span class="num">+971 50 580 4276</span></span>
+                <span class="muted">WhatsApp →</span>
+              </a>
+              <a href="mailto:astralfconsulting@gmail.com">
+                <span><span class="role">Email</span><br /><span class="num">astralfconsulting@gmail.com</span></span>
+                <span class="muted">Mail →</span>
+              </a>
+            </div>
+          </div>
+
+          <form class="form-grid" id="leadForm" novalidate>
+            <div class="form-row">
+              <label>Name
+                <input type="text" name="name" required placeholder="Your name" autocomplete="name" />
+              </label>
+              <label>Phone / WhatsApp
+                <input type="tel" name="phone" required placeholder="+971 …" autocomplete="tel" />
+              </label>
+            </div>
+            <label>Email
+              <input type="email" name="email" required placeholder="you@company.ae" autocomplete="email" />
+            </label>
+            <div class="form-row">
+              <label>Business type
+                <input type="text" name="business_type" required placeholder="e.g. HVAC, clinic, salon" id="businessType" />
+              </label>
+              <label>AI employee interest
+                <select name="product" id="productSelect">
+                  <option value="AI Sales Employee">AI Sales Employee</option>
+                  <option value="AI Customer Service Employee">AI Customer Service Employee</option>
+                  <option value="AI Booking Employee">AI Booking Employee</option>
+                  <option value="Not sure — recommend">Not sure — recommend</option>
+                  <option value="Custom industry AI employee">Custom / other industry</option>
+                </select>
+              </label>
+            </div>
+            <label>Where do customers message you?
+              <input type="text" name="channels" placeholder="WhatsApp, website, Instagram…" />
+            </label>
+            <label>What should the AI handle first?
+              <textarea name="message" placeholder="e.g. After-hours inquiries, pricing questions, bookings…"></textarea>
+            </label>
+            <button type="submit" class="btn btn-primary btn-block" id="leadSubmit">Get my AI employee</button>
+            <p class="form-note">Submits to sales + client happiness copy + email. We respond on WhatsApp.</p>
+            <p class="form-status" id="formStatus" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/images/logo-star.jpg" alt="" width="34" height="34" />
+        <div>
+          <strong>AstralForge AI</strong>
+          <span>AI employees · UAE</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#demo">Demo</a>
+        <a href="#products">Products</a>
+        <a href="#get-started">Get started</a>
+        <a href="quote.html">Legacy quote</a>
+      </div>
+      <p class="footer-copy">© <span id="year"></span> AstralForgeAE. AI employees for businesses that never want to miss another customer.</p>
     </div>
+  </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-    <script src="js/lead-router.js"></script>
-    <script src="js/shop.js"></script>
-    <script src="js/cinematic.js"></script>
-  </body>
+  <a class="fab-wa" href="https://wa.me/971554458850?text=Hello%20AstralForge%20AI%20Sales%2C%20I%20want%20an%20AI%20employee." data-wa-channel="sales" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp sales">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.85 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <div class="sticky-cta" aria-label="Quick actions">
+    <a class="btn btn-ghost btn-sm" href="#demo" style="flex:1">Try demo</a>
+    <a class="btn btn-primary btn-sm" href="#get-started" style="flex:1">Get AI employee</a>
+  </div>
+
+  <script src="js/lead-router.js"></script>
+  <script src="js/ai-main.js"></script>
+</body>
 </html>
