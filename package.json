@@ -5,7 +5,10 @@
   "private": true,
   "scripts": {
     "start": "npx --yes serve -s . -l ${PORT:-3000}",
-    "dev": "npx --yes serve . -l 3000"
+    "dev": "npx --yes serve . -l 3000",
+    "api": "npm --prefix api start",
+    "api:dev": "npm --prefix api run dev",
+    "api:install": "npm --prefix api install"
   },
   "engines": {
     "node": ">=18"

@@ -155,6 +155,35 @@
 
   init();
 
+  /** Homepage AI employee lead form */
+  async function sendLead(fields) {
+    const lines = [
+      "AI Employee request",
+      `Name: ${fields.name || ""}`,
+      `Business: ${fields.business_name || fields.company || ""}`,
+      `Website: ${fields.website || ""}`,
+      `Industry: ${fields.industry || ""}`,
+      `Email: ${fields.email || ""}`,
+      `Phone/WA: ${fields.phone || ""}`,
+      `Solution: ${fields.solution || fields.product || ""}`,
+      `Plan: ${fields.plan || ""}`,
+      `Monthly enquiries: ${fields.monthly_enquiries || fields.monthly_inquiries || ""}`,
+      `Message: ${fields.message || ""}`,
+      `Source: ${fields.source_page || ""} ${fields.page_url || ""}`,
+    ].join("\n");
+
+    const result = await deliverLead({
+      channel: "sales",
+      subject: `AI Employee — ${fields.business_name || fields.name || "New lead"}`,
+      fields: {
+        ...fields,
+        form: "ai_employee_request",
+      },
+      waText: lines,
+    });
+    return result;
+  }
+
   global.AstralLeadRouter = {
     LEAD_EMAIL,
     WHATSAPP,
@@ -169,6 +198,8 @@
     contactPhone,
     formatDisplay,
     deliverLead,
+    sendLead,
+    emailLead,
     wireDualWaLinks,
     applyLanguagePhones,
     waLink,

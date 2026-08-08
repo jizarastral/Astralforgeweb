@@ -962,3 +962,171 @@ h1, h2, h3 { letter-spacing: -0.03em; line-height: 1.12; font-weight: 700; }
 @media (max-width: 768px) {
   .trust-grid { grid-template-columns: 1fr; }
 }
+
+/* Payment return banner */
+.pay-banner {
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.92rem;
+  background: rgba(61, 214, 140, 0.15);
+  border-bottom: 1px solid rgba(61, 214, 140, 0.4);
+  color: var(--text);
+}
+
+/* ===== Master-prompt additions ===== */
+.hero-demo { width: 100%; max-width: 480px; margin-left: auto; }
+.hero-chat { min-height: 520px; display: flex; flex-direction: column; }
+.hero-chat .demo-messages { flex: 1; min-height: 240px; max-height: 320px; }
+.demo-badge {
+  font-size: 0.68rem !important;
+  letter-spacing: 0.12em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(94,231,255,.25);
+  color: var(--cyan) !important;
+}
+.hero-demo-foot { flex-direction: column; align-items: stretch !important; gap: 10px; }
+.demo-input-row { display: flex; gap: 8px; }
+.demo-input-row input {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.25);
+  border-radius: 12px;
+  padding: 10px 12px;
+  outline: none;
+}
+.demo-input-row input:focus { border-color: var(--cyan); }
+.demo-note { font-size: 0.72rem; color: var(--muted); margin: 0; }
+.lead-capture-card {
+  margin: 0 14px 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(61,214,140,.35);
+  background: rgba(61,214,140,.08);
+}
+.lead-capture-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.lead-capture-card ul { display: grid; gap: 6px; }
+.lead-capture-card li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.lead-capture-card strong { color: var(--text); font-weight: 600; text-align: right; }
+.ok-text { color: var(--ok) !important; }
+
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.value-card {
+  padding: 22px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.value-card .num {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--cyan);
+  font-weight: 600;
+}
+.value-card h3 { margin: 10px 0 8px; font-size: 1.2rem; }
+.value-card p { color: var(--muted); font-size: 0.92rem; }
+
+.industry-grid-rich { grid-template-columns: repeat(3, 1fr); }
+.industry-card ul {
+  margin: 10px 0 14px;
+  display: grid;
+  gap: 6px;
+}
+.industry-card li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.industry-card li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.55em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  opacity: 0.7;
+}
+.industry-examples {
+  font-size: 0.8rem;
+  color: var(--cyan);
+  margin-top: 4px;
+}
+.industry-note { font-size: 0.78rem; color: var(--muted); margin-top: 8px; }
+
+.process-4 { grid-template-columns: repeat(4, 1fr); }
+.price-for { color: var(--muted); font-size: 0.88rem; margin: -4px 0 14px; }
+.founding-list {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+.founding-list li {
+  padding-left: 18px;
+  position: relative;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.founding-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.sub-cta {
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+.tech-bar {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8px 0 24px;
+}
+.tech-title { font-size: 1.35rem; margin: 10px 0 8px; }
+
+.trust-line {
+  margin-top: 18px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  max-width: 42ch;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .value-grid { grid-template-columns: 1fr 1fr; }
+  .industry-grid-rich { grid-template-columns: 1fr 1fr; }
+  .process-4 { grid-template-columns: 1fr 1fr; }
+  .hero-demo { margin: 0 auto; max-width: 100%; }
+}
+@media (max-width: 768px) {
+  .value-grid { grid-template-columns: 1fr; }
+  .industry-grid-rich { grid-template-columns: 1fr; }
+  .process-4 { grid-template-columns: 1fr; }
+  .hero h1 { max-width: none; }
+}
+

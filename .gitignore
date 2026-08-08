@@ -1,7 +1,8 @@
 node_modules/
-.DS_Store
-Thumbs.db
-*.log
+api/node_modules/
+api/.env
+api/secrets/
+api/data/*.json
+!api/data/.gitkeep
 .env
-.vscode/
-.idea/
+*.log

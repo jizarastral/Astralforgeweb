@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AstralForge Ops — History & Money</title>
+  <style>
+    :root {
+      --bg: #050814; --card: #0c1224; --text: #e9eef8; --muted: #8b9bb4;
+      --cyan: #5ee7ff; --ok: #3dd68c; --warn: #f5c542; --bad: #ff6b7a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 20px; line-height: 1.45; }
+    h1 { font-size: 1.4rem; margin-bottom: 8px; }
+    .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; align-items: center; }
+    input, button, select {
+      background: #0a1020; border: 1px solid rgba(94,231,255,.25); color: var(--text);
+      border-radius: 10px; padding: 10px 12px; font: inherit;
+    }
+    button { background: linear-gradient(135deg,#5ee7ff,#7c8cff); color: #050814; font-weight: 700; cursor: pointer; border: none; }
+    button.ghost { background: transparent; color: var(--cyan); border: 1px solid rgba(94,231,255,.35); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; margin-bottom: 18px; }
+    .card { background: var(--card); border: 1px solid rgba(94,231,255,.12); border-radius: 14px; padding: 14px; }
+    .card b { display: block; font-size: 1.35rem; color: var(--cyan); }
+    .card span { color: var(--muted); font-size: 0.8rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,.06); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: .06em; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+    .paid { background: rgba(61,214,140,.15); color: var(--ok); }
+    .pending { background: rgba(245,197,66,.12); color: var(--warn); }
+    .panel { background: var(--card); border-radius: 16px; border: 1px solid rgba(94,231,255,.12); padding: 14px; margin-bottom: 16px; overflow: auto; }
+    .err { color: var(--bad); margin: 8px 0; }
+    a { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <h1>AstralForge Ops</h1>
+  <p class="sub">History · leads · prospects · money. Runs while you sleep.</p>
+
+  <div class="row" id="loginRow">
+    <input type="password" id="adminKey" placeholder="Admin API key" style="min-width:240px" />
+    <button type="button" id="loadBtn">Load history</button>
+    <button type="button" class="ghost" id="autoBtn">Auto-refresh 30s</button>
+    <a href="/">← Site</a>
+  </div>
+  <p class="err" id="err"></p>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="panel">
+    <h2 style="font-size:1rem;margin-bottom:10px">Payments (money flow)</h2>
+    <table>
+      <thead><tr><th>Ref</th><th>Status</th><th>AED</th><th>Package</th><th>Who</th><th>When</th><th></th></tr></thead>
+      <tbody id="payBody"></tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2 style="font-size:1rem;margin-bottom:10px">Leads</h2>
+    <table>
+      <thead><tr><th>When</th><th>Name</th><th>Business</th><th>Contact</th><th>Plan</th></tr></thead>
+      <tbody id="leadBody"></tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2 style="font-size:1rem;margin-bottom:10px">Prospect pipeline</h2>
+    <table>
+      <thead><tr><th>Stage</th><th>Name</th><th>Business</th><th>Plan</th><th>Updated</th></tr></thead>
+      <tbody id="prosBody"></tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2 style="font-size:1rem;margin-bottom:10px">Event log</h2>
+    <table>
+      <thead><tr><th>When</th><th>Type</th><th>Detail</th></tr></thead>
+      <tbody id="evBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let timer = null;
+    const keyStore = "af_admin_key";
+
+    function key() {
+      return $("adminKey").value.trim() || localStorage.getItem(keyStore) || "";
+    }
+
+    async function api(path, opts) {
+      const k = key();
+      const res = await fetch(path, {
+        ...opts,
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-key": k,
+          ...(opts && opts.headers),
+        },
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || res.statusText);
+      return data;
+    }
+
+    function esc(s) {
+      return String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    }
+
+    function fmt(t) {
+      if (!t) return "—";
+      try { return new Date(t).toLocaleString(); } catch { return t; }
+    }
+
+    async function load() {
+      $("err").textContent = "";
+      try {
+        const k = key();
+        if (!k) throw new Error("Enter admin key from api/.env ADMIN_API_KEY");
+        localStorage.setItem(keyStore, k);
+        const data = await api("/api/history?limit=150");
+        const s = data.summary || {};
+        $("cards").innerHTML = [
+          ["Paid AED", s.paidAed ?? 0],
+          ["Paid #", s.paidCount ?? 0],
+          ["Pending AED", s.pendingAed ?? 0],
+          ["Pending #", s.pendingCount ?? 0],
+          ["Leads", s.leads ?? 0],
+          ["Prospects", s.prospects ?? 0],
+        ].map(([l, v]) => `<div class="card"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
+
+        $("payBody").innerHTML = (data.payments || []).map((p) => {
+          const st = p.status === "paid" ? "paid" : "pending";
+          const mark =
+            p.status === "pending"
+              ? `<button type="button" data-ref="${esc(p.ref)}" class="mark">Mark paid</button>`
+              : "✓";
+          return `<tr>
+            <td><code>${esc(p.ref)}</code><br><small>${esc(p.method)}</small></td>
+            <td><span class="tag ${st}">${esc(p.status)}</span></td>
+            <td>${esc(p.amountAed)}</td>
+            <td>${esc(p.packageId)}</td>
+            <td>${esc(p.name)}<br><small>${esc(p.businessName || "")}<br>${esc(p.email || "")}</small></td>
+            <td>${fmt(p.createdAt)}</td>
+            <td>${mark}</td>
+          </tr>`;
+        }).join("") || `<tr><td colspan="7">No payments yet</td></tr>`;
+
+        $("leadBody").innerHTML = (data.leads || []).map((l) => `<tr>
+          <td>${fmt(l.createdAt)}</td>
+          <td>${esc(l.name)}</td>
+          <td>${esc(l.business_name || l.businessName)}</td>
+          <td>${esc(l.phone)}<br>${esc(l.email)}</td>
+          <td>${esc(l.plan || l.solution)}</td>
+        </tr>`).join("") || `<tr><td colspan="5">No leads</td></tr>`;
+
+        $("prosBody").innerHTML = (data.prospects || []).map((p) => `<tr>
+          <td><span class="tag ${p.stage === "paid" ? "paid" : "pending"}">${esc(p.stage)}</span></td>
+          <td>${esc(p.name)}</td>
+          <td>${esc(p.businessName)}</td>
+          <td>${esc(p.plan)}</td>
+          <td>${fmt(p.updatedAt || p.createdAt)}</td>
+        </tr>`).join("") || `<tr><td colspan="5">No prospects</td></tr>`;
+
+        $("evBody").innerHTML = (data.events || []).map((e) => `<tr>
+          <td>${fmt(e.at)}</td>
+          <td>${esc(e.type)}</td>
+          <td><code style="font-size:0.75rem">${esc(JSON.stringify(e).slice(0, 180))}</code></td>
+        </tr>`).join("") || `<tr><td colspan="3">No events</td></tr>`;
+
+        document.querySelectorAll(".mark").forEach((btn) => {
+          btn.onclick = async () => {
+            if (!confirm("Confirm money received for " + btn.dataset.ref + "?")) return;
+            await api("/api/history/payments/" + encodeURIComponent(btn.dataset.ref) + "/mark-paid", {
+              method: "POST",
+              body: JSON.stringify({ via: "admin_ui", note: "Marked paid in ops dashboard" }),
+            });
+            load();
+          };
+        });
+      } catch (e) {
+        $("err").textContent = e.message || String(e);
+      }
+    }
+
+    $("loadBtn").onclick = load;
+    $("autoBtn").onclick = () => {
+      if (timer) { clearInterval(timer); timer = null; $("autoBtn").textContent = "Auto-refresh 30s"; return; }
+      load();
+      timer = setInterval(load, 30000);
+      $("autoBtn").textContent = "Stop auto-refresh";
+    };
+    const saved = localStorage.getItem(keyStore);
+    if (saved) { $("adminKey").value = saved; load(); }
+  </script>
+</body>
+</html>
