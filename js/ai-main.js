@@ -343,7 +343,7 @@
         });
       } else {
         window.open(
-          `https://wa.me/971554458850?text=${encodeURIComponent(waText)}`,
+          `https://wa.me/971505804276?text=${encodeURIComponent(waText)}`,
           "_blank",
           "noopener,noreferrer"
         );

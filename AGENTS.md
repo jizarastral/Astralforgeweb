@@ -15,19 +15,21 @@ Money-first goal: **qualified leads → demos → paid AI automation clients →
 - **Stack:** HTML / CSS / JS. Dark navy `#050814`, cyan `#5ee7ff`, Outfit + JetBrains Mono.  
 - **Homepage styles:** `css/ai-convert.css` · **scripts:** `js/ai-main.js` + `js/lead-router.js`
 
-## Contacts (all three must stay visible)
+## Contacts
 
-| Role | Number | WhatsApp |
-|------|--------|----------|
-| **Sales** | **+971 55 445 8850** | https://wa.me/971554458850 |
+| Role | Number | Notes |
+|------|--------|-------|
+| **WhatsApp (all)** | **+971 50 580 4276** | https://wa.me/971505804276 — primary CTA |
+| **Arabic language** | **+971 55 445 8850** | 055 445 8850 — when UI/lang is Arabic |
+| **All other languages** | **+971 50 580 4276** | 050 580 4276 |
 | **Technical** | **+971 50 836 4246** | https://wa.me/971508364246 |
-| **Client happiness** | **+971 50 580 4276** | https://wa.me/971505804276 |
 | Email | astralfconsulting@gmail.com | mailto |
 
 ### Lead routing
 
-- **Sales** leads → Sales number + **copy to Client happiness** + email  
-- **Technical** leads → Technical number + **copy to Client happiness** + email  
+- **Sales / AI leads** → WhatsApp **+971 50 580 4276** + email  
+- **Arabic display/contact** → **+971 55 445 8850** when `lang` is Arabic  
+- **Technical** leads → Technical WhatsApp + email  
 - Forms use `js/lead-router.js`
 
 ## AI products (homepage)

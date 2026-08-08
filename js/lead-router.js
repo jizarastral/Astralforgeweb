@@ -1,23 +1,55 @@
 /**
  * Lead routing for AstralForgeAE
- * - Sales: +971 55 445 8850
+ * - WhatsApp (all): +971 50 580 4276 (050 580 4276)
+ * - Arabic language display/contact: +971 55 445 8850 (055 445 8850)
+ * - All other languages display/contact: +971 50 580 4276
  * - Technical: +971 50 836 4246
- * - Client happiness (copy of every lead): +971 50 580 4276
  * - Email: astralfconsulting@gmail.com
  */
 (function (global) {
   const LEAD_EMAIL = "astralfconsulting@gmail.com";
-  const SALES_WA = "971554458850";
+  /** Primary WhatsApp — always */
+  const WHATSAPP = "971505804276";
+  /** Arabic language contact */
+  const ARABIC_PHONE = "971554458850";
+  /** Default / non-Arabic languages */
+  const DEFAULT_PHONE = "971505804276";
   const TECHNICAL_WA = "971508364246";
-  const CLIENT_HAPPINESS_WA = "971505804276";
+
+  // Back-compat aliases
+  const SALES_WA = WHATSAPP;
+  const CLIENT_HAPPINESS_WA = WHATSAPP;
+
+  function isArabicLang() {
+    const htmlLang = (document.documentElement.lang || "").toLowerCase();
+    if (htmlLang.startsWith("ar")) return true;
+    const nav = (navigator.language || navigator.userLanguage || "").toLowerCase();
+    return nav.startsWith("ar");
+  }
+
+  /** Display / call number by language (not necessarily WhatsApp) */
+  function contactPhone() {
+    return isArabicLang() ? ARABIC_PHONE : DEFAULT_PHONE;
+  }
+
+  function formatDisplay(digits) {
+    const d = String(digits).replace(/\D/g, "");
+    if (d === "971554458850") return "+971 55 445 8850";
+    if (d === "971505804276") return "+971 50 580 4276";
+    if (d === "971508364246") return "+971 50 836 4246";
+    if (d.startsWith("971") && d.length === 12) {
+      return `+${d.slice(0, 3)} ${d.slice(3, 5)} ${d.slice(5, 8)} ${d.slice(8)}`;
+    }
+    return "+" + d;
+  }
 
   function waLink(number, text) {
     const n = String(number).replace(/\D/g, "");
-    return `https://wa.me/${n}?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/${n}?text=${encodeURIComponent(text || "")}`;
   }
 
   function primaryFor(channel) {
-    return channel === "support" || channel === "technical" ? TECHNICAL_WA : SALES_WA;
+    return channel === "support" || channel === "technical" ? TECHNICAL_WA : WHATSAPP;
   }
 
   function labelFor(channel) {
@@ -54,25 +86,15 @@
     const fields = {
       ...opts.fields,
       channel: label,
-      routed_primary: `+${primary}`,
-      routed_client_happiness_copy: `+${CLIENT_HAPPINESS_WA}`,
+      language: isArabicLang() ? "ar" : "other",
+      contact_phone_display: formatDisplay(contactPhone()),
+      routed_whatsapp: `+${primary}`,
     };
 
     const emailOk = await emailLead(opts.subject, fields);
-
     window.open(waLink(primary, opts.waText), "_blank", "noopener,noreferrer");
 
-    const copyText =
-      `[CLIENT HAPPINESS COPY · ${label}]\n` +
-      `Primary: +${primary}\n` +
-      `—\n` +
-      opts.waText;
-
-    setTimeout(() => {
-      window.open(waLink(CLIENT_HAPPINESS_WA, copyText), "_blank", "noopener,noreferrer");
-    }, 600);
-
-    return { emailOk, primary, clientHappiness: CLIENT_HAPPINESS_WA };
+    return { emailOk, primary, whatsapp: WHATSAPP };
   }
 
   function wireDualWaLinks() {
@@ -88,7 +110,6 @@
       e.preventDefault();
       const ch = channel === "support" ? "technical" : channel;
       const primary = primaryFor(ch);
-      const label = labelFor(ch);
       let text = "";
       try {
         const u = new URL(href, window.location.origin);
@@ -98,32 +119,58 @@
         text =
           ch === "technical"
             ? "Hello AstralForgeAE Technical Support, I need assistance."
-            : "Hello AstralForgeAE Sales, I'd like a quote.";
+            : "Hi AstralForge, I want to see how an AI employee could work for my business.";
       }
 
       window.open(waLink(primary, text), "_blank", "noopener,noreferrer");
-      setTimeout(() => {
-        window.open(
-          waLink(
-            CLIENT_HAPPINESS_WA,
-            `[CLIENT HAPPINESS COPY · ${label}]\nPrimary: +${primary}\n—\n${text}`
-          ),
-          "_blank",
-          "noopener,noreferrer"
-        );
-      }, 600);
     });
   }
 
+  /** Apply language-aware display numbers on [data-phone-lang] nodes */
+  function applyLanguagePhones() {
+    const phone = contactPhone();
+    const display = formatDisplay(phone);
+    document.querySelectorAll("[data-phone-lang]").forEach((el) => {
+      if (el.tagName === "A" && el.getAttribute("href") && el.getAttribute("href").includes("tel:")) {
+        el.setAttribute("href", "tel:+" + phone);
+      }
+      if (el.hasAttribute("data-phone-text")) {
+        el.textContent = display;
+      } else if (el.querySelector("[data-phone-text]")) {
+        el.querySelectorAll("[data-phone-text]").forEach((n) => {
+          n.textContent = display;
+        });
+      }
+    });
+  }
+
+  function init() {
+    wireDualWaLinks();
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", applyLanguagePhones);
+    } else {
+      applyLanguagePhones();
+    }
+  }
+
+  init();
+
   global.AstralLeadRouter = {
     LEAD_EMAIL,
+    WHATSAPP,
     SALES_WA,
+    ARABIC_PHONE,
+    DEFAULT_PHONE,
     TECHNICAL_WA,
     CLIENT_HAPPINESS_WA,
-    ANALYSIS_WA: CLIENT_HAPPINESS_WA,
+    ANALYSIS_WA: WHATSAPP,
     SUPPORT_WA: TECHNICAL_WA,
+    isArabicLang,
+    contactPhone,
+    formatDisplay,
     deliverLead,
     wireDualWaLinks,
+    applyLanguagePhones,
     waLink,
   };
 })(window);
