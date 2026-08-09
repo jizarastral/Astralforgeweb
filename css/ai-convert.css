@@ -1109,6 +1109,30 @@ h1, h2, h3 { letter-spacing: -0.03em; line-height: 1.12; font-weight: 700; }
 }
 .tech-title { font-size: 1.35rem; margin: 10px 0 8px; }
 
+.partner-bar {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 0 8px;
+}
+.partner-bar strong { color: var(--text); font-weight: 600; }
+.footer-partner {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 6px;
+  max-width: 36ch;
+  line-height: 1.4;
+}
+.footer-partner-copy {
+  margin-top: 6px !important;
+  max-width: 32ch;
+  margin-left: auto;
+}
+@media (max-width: 1024px) {
+  .footer-partner-copy { margin-left: 0; }
+}
+
 .trust-line {
   margin-top: 18px;
   font-size: 0.9rem;
