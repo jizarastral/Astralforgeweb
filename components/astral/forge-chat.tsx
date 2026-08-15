@@ -14,6 +14,7 @@ export function ForgeChat() {
   const [error, setError] = useState("");
   const [unlocked, setUnlocked] = useState(false);
   const [falling, setFalling] = useState(false);
+  const [star, setStar] = useState<{ x: number; y: number; trails: Array<{ x: number; y: number }> } | null>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
 
@@ -40,10 +41,41 @@ export function ForgeChat() {
   function explore() {
     if (falling || unlocked) return;
     setFalling(true);
-    window.setTimeout(() => {
-      setUnlocked(true);
-      document.getElementById("hole")?.scrollIntoView({ behavior: "smooth" });
-    }, 1100);
+    setUnlocked(true);
+
+    const html = document.documentElement;
+    const prevSmooth = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+
+    const startX = window.innerWidth / 2;
+    const startY = window.innerHeight * 0.58;
+    const endY = window.innerHeight + 48;
+    const startScroll = window.scrollY;
+    const hole = document.getElementById("hole");
+    const endScroll = hole
+      ? hole.getBoundingClientRect().top + window.scrollY
+      : startScroll + window.innerHeight;
+    const duration = 2200;
+    const t0 = performance.now();
+    const trails: Array<{ x: number; y: number }> = [];
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - t0) / duration);
+      const ease = t * t * (1.2 - 0.2 * t);
+      const y = startY + (endY - startY) * ease;
+      const x = startX + Math.sin(t * Math.PI) * 18;
+      trails.unshift({ x, y });
+      if (trails.length > 10) trails.pop();
+      setStar({ x, y, trails: [...trails] });
+      window.scrollTo(0, startScroll + (endScroll - startScroll) * ease);
+      if (t < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        setStar(null);
+        html.style.scrollBehavior = prevSmooth;
+      }
+    };
+    requestAnimationFrame(tick);
   }
 
   async function send(text: string) {
@@ -131,20 +163,35 @@ export function ForgeChat() {
     >
       <TwinkleStars />
 
-      {falling ? (
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[58%] z-20 -translate-x-1/2 animate-[star-fall_1.1s_ease-in_forwards]"
-        >
-          <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
-            <path
-              d="M32 4 L38 24 L58 24 L42 36 L48 56 L32 44 L16 56 L22 36 L6 24 L26 24 Z"
-              stroke="#c4b5fd"
-              strokeWidth="2.2"
-              fill="rgba(167,139,250,0.3)"
+      {star ? (
+        <div className="pointer-events-none fixed inset-0 z-[80]" aria-hidden>
+          {star.trails.map((p, i) => (
+            <span
+              key={i}
+              className="absolute block h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-200"
+              style={{
+                left: p.x,
+                top: p.y,
+                opacity: Math.max(0, 0.35 - i * 0.03),
+                transform: `translate(-50%, -50%) scale(${1 - i * 0.07})`,
+                boxShadow: "0 0 10px rgba(196,181,253,0.55)",
+              }}
             />
-          </svg>
-        </span>
+          ))}
+          <span
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+            style={{ left: star.x, top: star.y }}
+          >
+            <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+              <path
+                d="M32 4 L38 24 L58 24 L42 36 L48 56 L32 44 L16 56 L22 36 L6 24 L26 24 Z"
+                stroke="#ddd6fe"
+                strokeWidth="2.2"
+                fill="rgba(196,181,253,0.45)"
+              />
+            </svg>
+          </span>
+        </div>
       ) : null}
 
       <div className="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center">

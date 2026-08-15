@@ -230,16 +230,8 @@
   50% { transform: translate3d(4%, -6%, 0) scale(1.08); opacity: 0.9; }
 }
 
-@keyframes star-fall {
-  0% { transform: translate(-50%, 0) scale(1); opacity: 1; }
-  70% { opacity: 1; }
-  100% { transform: translate(-50%, 42vh) scale(0.7); opacity: 0; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
+  html {
+    scroll-behavior: auto;
   }
 }
