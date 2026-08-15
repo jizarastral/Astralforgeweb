@@ -1,68 +1,114 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { GLOW_COUNT, glowSrc } from "@/lib/glow-reel";
+
+function coverDraw(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  w: number,
+  h: number,
+) {
+  const ir = img.width / img.height;
+  const cr = w / h;
+  let dw = w;
+  let dh = h;
+  let dx = 0;
+  let dy = 0;
+  if (ir > cr) {
+    dw = h * ir;
+    dx = (w - dw) / 2;
+  } else {
+    dh = w / ir;
+    dy = (h - dh) * 0.62;
+  }
+  ctx.drawImage(img, dx, dy, dw, dh);
+}
 
 export function TwinkleStars() {
-  const ref = useRef<HTMLCanvasElement>(null);
+  const canvas = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const node = canvas.current;
+    if (!node) return;
+    const ctx = node.getContext("2d");
     if (!ctx) return;
 
+    const cache = new Map<number, HTMLImageElement>();
+    const pending = new Set<number>();
+    let index = 0;
     let raf = 0;
-    let w = 0;
-    let h = 0;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    type Star = { x: number; y: number; r: number; a: number; s: number };
-    let stars: Star[] = [];
+    let last = 0;
 
-    const resize = () => {
-      w = window.innerWidth;
-      h = Math.max(180, Math.floor(window.innerHeight * 0.38));
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
+    const load = (i: number) => {
+      const n = ((i % GLOW_COUNT) + GLOW_COUNT) % GLOW_COUNT;
+      if (cache.has(n) || pending.has(n)) return;
+      pending.add(n);
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        cache.set(n, img);
+        pending.delete(n);
+      };
+      img.onerror = () => pending.delete(n);
+      img.src = glowSrc(n);
+    };
+
+    const size = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = window.innerWidth;
+      const h = Math.max(160, Math.floor(window.innerHeight * 0.34));
+      node.width = Math.floor(w * dpr);
+      node.height = Math.floor(h * dpr);
+      node.style.width = `${w}px`;
+      node.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      stars = Array.from({ length: 42 }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.3 + 0.25,
-        a: Math.random() * 0.7 + 0.15,
-        s: 0.6 + Math.random() * 1.8,
-      }));
     };
 
-    let t = 0;
-    const draw = () => {
-      t += 0.016;
+    const paint = () => {
+      const w = node.clientWidth;
+      const h = node.clientHeight;
+      const img = cache.get(index) ?? cache.get((index + GLOW_COUNT - 1) % GLOW_COUNT);
       ctx.clearRect(0, 0, w, h);
-      for (const star of stars) {
-        const twinkle = 0.35 + 0.65 * Math.abs(Math.sin(t * star.s + star.x));
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(230, 228, 255, ${star.a * twinkle})`;
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      raf = requestAnimationFrame(draw);
+      if (!img) return;
+      coverDraw(ctx, img, w, h);
     };
 
-    resize();
-    draw();
-    window.addEventListener("resize", resize);
+    const tick = (now: number) => {
+      if (!last) last = now;
+      if (now - last > 110) {
+        index = (index + 1) % GLOW_COUNT;
+        last = now;
+        load(index + 1);
+        load(index + 2);
+      }
+      paint();
+      raf = requestAnimationFrame(tick);
+    };
+
+    size();
+    for (let i = 0; i < 8; i++) load(i);
+    let warm = 0;
+    const idle = () => {
+      if (warm >= GLOW_COUNT) return;
+      load(warm);
+      warm += 1;
+      if (warm < GLOW_COUNT) window.setTimeout(idle, 20);
+    };
+    const warmId = window.setTimeout(idle, 80);
+    raf = requestAnimationFrame(tick);
+    window.addEventListener("resize", size);
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
+      window.clearTimeout(warmId);
+      window.removeEventListener("resize", size);
     };
   }, []);
 
   return (
-    <canvas
-      ref={ref}
-      aria-hidden
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-0"
-    />
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[34vh]">
+      <canvas ref={canvas} aria-hidden className="absolute inset-0 h-full w-full" />
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#07070b] to-transparent" />
+    </div>
   );
 }
