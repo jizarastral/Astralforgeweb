@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 export function MasterFooter() {
   const path = usePathname();
-  if (path === "/") return null;
+  if (path === "/" || path === "/plans") return null;
   return (
     <footer className="relative border-t border-white/10">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent" />

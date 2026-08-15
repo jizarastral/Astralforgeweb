@@ -15,7 +15,7 @@ export function MasterHeader() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  if (path === "/") return null;
+  if (path === "/" || path === "/plans") return null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
