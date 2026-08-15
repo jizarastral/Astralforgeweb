@@ -55,8 +55,8 @@ export function publicProviderStatus() {
   const first = providers.find((p) => p.ready);
   return {
     configured: Boolean(first),
-    mode: first?.id || "local",
-    label: first?.label || "Local preview",
+    mode: first?.id || "astral",
+    label: first?.label || "Astral",
     ready: providers.filter((p) => p.ready).map((p) => p.id),
     providers,
   };

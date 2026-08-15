@@ -10,7 +10,7 @@ export function ForgeChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [mode, setMode] = useState("local");
+  const [mode, setMode] = useState("");
   const [error, setError] = useState("");
   const [unlocked, setUnlocked] = useState(false);
   const [falling, setFalling] = useState(false);
@@ -21,8 +21,15 @@ export function ForgeChat() {
   useEffect(() => {
     fetch("/api/azure/status")
       .then((r) => r.json())
-      .then((d: { mode?: string; label?: string }) => setMode(d.label || d.mode || "local"))
-      .catch(() => setMode("local"));
+      .then((d: { label?: string; mode?: string; configured?: boolean }) => {
+        if (!d.configured) {
+          setMode("");
+          return;
+        }
+        const name = d.label || d.mode || "";
+        setMode(name === "local" || name === "Local preview" ? "" : name);
+      })
+      .catch(() => setMode(""));
   }, []);
 
   useEffect(() => {
@@ -112,7 +119,7 @@ export function ForgeChat() {
           if (!payload || payload === "[DONE]") continue;
           try {
             const json = JSON.parse(payload) as { text?: string; mode?: string };
-            if (json.mode) setMode(json.mode);
+            if (json.mode && json.mode !== "local") setMode(json.mode);
             if (json.text) {
               assembled += json.text;
               const snapshot = assembled;
