@@ -129,7 +129,7 @@ export function RabbitHole() {
       id="hole"
       ref={track}
       className="relative bg-black"
-      style={{ height: `${100 + REEL_COUNT * 6.5}vh` }}
+      style={{ height: `${100 + REEL_COUNT * 8}vh` }}
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-black">
         <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-hidden />

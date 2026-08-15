@@ -1,4 +1,4 @@
-export const REEL_COUNT = 233;
+export const REEL_COUNT = 106;
 
 export function reelSrc(index: number) {
   const n = Math.max(0, Math.min(REEL_COUNT - 1, index));
