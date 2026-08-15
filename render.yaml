@@ -1,19 +1,28 @@
-# AstralForgeAE — Render Blueprint
-# Dashboard: New → Blueprint → select this repo
-# Or: New → Static Site → Root Directory . → Publish Directory .
+# AstralForge AE — Node web service for Next.js chat
+# Domain: astralforgeae.com → astralforgeweb.onrender.com
 services:
   - type: web
-    name: astralforge-web
-    runtime: static
+    name: astralforgeweb
+    runtime: node
     plan: free
-    staticPublishPath: .
-    headers:
-      - path: /*
-        name: X-Frame-Options
-        value: DENY
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-      - path: /assets/*
-        name: Cache-Control
-        value: public, max-age=604800
+    region: frankfurt
+    buildCommand: corepack enable && pnpm install && pnpm build
+    startCommand: pnpm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: NVIDIA_API_KEY
+        sync: false
+      - key: NVIDIA_MODEL
+        value: meta/llama-3.1-8b-instruct
+      - key: AZURE_OPENAI_ENDPOINT
+        sync: false
+      - key: AZURE_OPENAI_API_KEY
+        sync: false
+      - key: AZURE_OPENAI_DEPLOYMENT
+        sync: false
+      - key: XAI_API_KEY
+        sync: false

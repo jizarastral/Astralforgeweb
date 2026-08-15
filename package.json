@@ -1,16 +1,38 @@
 {
   "name": "astralforge-web",
-  "version": "1.0.0",
-  "description": "AstralForgeAE — fabrication, HVAC G+20, 3D printing, IT & web solutions (UAE)",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "start": "npx --yes serve -s . -l ${PORT:-3000}",
-    "dev": "npx --yes serve . -l 3000",
-    "api": "npm --prefix api start",
-    "api:dev": "npm --prefix api run dev",
-    "api:install": "npm --prefix api install"
-  },
+  "packageManager": "pnpm@11.18.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -H 0.0.0.0",
+    "lint": "next lint",
+    "sync:shopify": "node -e \"fetch('https://astralae.myshopify.com/products.json?limit=50').then(r=>r.text()).then(t=>require('fs').writeFileSync('lib/shopify-products-raw.json',t)).then(()=>console.log('raw ok'))\""
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.42.2",
+    "lucide-react": "^0.518.0",
+    "next": "^15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.6",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "^15.3.3",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.8.3"
   }
 }

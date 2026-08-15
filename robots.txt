@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-# Primary domain
-Sitemap: https://astralforgeae.com/sitemap.xml
-
-# Prefer not to index ops admin if crawled
-Disallow: /admin
-Disallow: /admin.html
