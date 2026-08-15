@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
-import { ArrowUp, ChevronDown, Loader2 } from "lucide-react";
+import { ArrowUp, Loader2 } from "lucide-react";
 import { TwinkleStars } from "@/components/astral/twinkle-stars";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -13,7 +13,6 @@ export function ForgeChat() {
   const [mode, setMode] = useState("");
   const [error, setError] = useState("");
   const [unlocked, setUnlocked] = useState(false);
-  const [hint, setHint] = useState(false);
   const scroller = useRef<HTMLDivElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
 
@@ -44,19 +43,9 @@ export function ForgeChat() {
     };
   }, [unlocked]);
 
-  useEffect(() => {
-    if (!unlocked) return;
-    const onScroll = () => {
-      if (window.scrollY > 48) setHint(false);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [unlocked]);
-
   function explore() {
     document.documentElement.style.overflow = "";
     setUnlocked(true);
-    setHint(true);
   }
 
   async function send(text: string) {
@@ -142,7 +131,7 @@ export function ForgeChat() {
       id="chat"
       className="relative flex h-[100svh] max-h-[100svh] items-center justify-center overflow-hidden bg-[#07070b] px-5 pt-16"
     >
-      <TwinkleStars />
+      <TwinkleStars gather={unlocked} />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center">
         {empty ? (
@@ -212,12 +201,6 @@ export function ForgeChat() {
         >
           Explore
         </button>
-        {hint ? (
-          <div className="mt-5 flex flex-col items-center gap-1 text-white/45" aria-live="polite">
-            <span className="text-[11px] tracking-[0.28em] uppercase">Scroll</span>
-            <ChevronDown className="h-5 w-5 animate-bounce" />
-          </div>
-        ) : null}
         <p className="mt-4 text-center text-[11px] text-white/28">{error || mode}</p>
       </div>
     </section>

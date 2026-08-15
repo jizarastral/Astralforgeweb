@@ -1,114 +1,116 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { GLOW_COUNT, glowSrc } from "@/lib/glow-reel";
+const NODES = [
+  { x: 10, y: 28, r: 3 },
+  { x: 18, y: 58, r: 2 },
+  { x: 26, y: 38, r: 4 },
+  { x: 34, y: 72, r: 2 },
+  { x: 42, y: 44, r: 3 },
+  { x: 50, y: 62, r: 5 },
+  { x: 58, y: 32, r: 3 },
+  { x: 66, y: 70, r: 2 },
+  { x: 74, y: 40, r: 4 },
+  { x: 82, y: 56, r: 3 },
+  { x: 90, y: 30, r: 2 },
+  { x: 88, y: 76, r: 3 },
+];
 
-function coverDraw(
-  ctx: CanvasRenderingContext2D,
-  img: HTMLImageElement,
-  w: number,
-  h: number,
-) {
-  const ir = img.width / img.height;
-  const cr = w / h;
-  let dw = w;
-  let dh = h;
-  let dx = 0;
-  let dy = 0;
-  if (ir > cr) {
-    dw = h * ir;
-    dx = (w - dw) / 2;
-  } else {
-    dh = w / ir;
-    dy = (h - dh) * 0.62;
-  }
-  ctx.drawImage(img, dx, dy, dw, dh);
-}
+const LINKS: Array<[number, number]> = [
+  [0, 2],
+  [2, 1],
+  [2, 4],
+  [4, 5],
+  [5, 3],
+  [5, 7],
+  [4, 6],
+  [6, 8],
+  [8, 9],
+  [9, 10],
+  [9, 11],
+  [6, 9],
+  [1, 3],
+];
 
-export function TwinkleStars() {
-  const canvas = useRef<HTMLCanvasElement>(null);
+const DUST = Array.from({ length: 36 }, (_, i) => ({
+  x: (i * 27 + 8) % 100,
+  y: (i * 17 + 12) % 88,
+  s: 1 + (i % 3),
+  delay: `${(i % 9) * 0.18}s`,
+  lane: 58 + (i % 8) * 4,
+}));
 
-  useEffect(() => {
-    const node = canvas.current;
-    if (!node) return;
-    const ctx = node.getContext("2d");
-    if (!ctx) return;
-
-    const cache = new Map<number, HTMLImageElement>();
-    const pending = new Set<number>();
-    let index = 0;
-    let raf = 0;
-    let last = 0;
-
-    const load = (i: number) => {
-      const n = ((i % GLOW_COUNT) + GLOW_COUNT) % GLOW_COUNT;
-      if (cache.has(n) || pending.has(n)) return;
-      pending.add(n);
-      const img = new Image();
-      img.decoding = "async";
-      img.onload = () => {
-        cache.set(n, img);
-        pending.delete(n);
-      };
-      img.onerror = () => pending.delete(n);
-      img.src = glowSrc(n);
-    };
-
-    const size = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = window.innerWidth;
-      const h = Math.max(160, Math.floor(window.innerHeight * 0.34));
-      node.width = Math.floor(w * dpr);
-      node.height = Math.floor(h * dpr);
-      node.style.width = `${w}px`;
-      node.style.height = `${h}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
-    const paint = () => {
-      const w = node.clientWidth;
-      const h = node.clientHeight;
-      const img = cache.get(index) ?? cache.get((index + GLOW_COUNT - 1) % GLOW_COUNT);
-      ctx.clearRect(0, 0, w, h);
-      if (!img) return;
-      coverDraw(ctx, img, w, h);
-    };
-
-    const tick = (now: number) => {
-      if (!last) last = now;
-      if (now - last > 110) {
-        index = (index + 1) % GLOW_COUNT;
-        last = now;
-        load(index + 1);
-        load(index + 2);
-      }
-      paint();
-      raf = requestAnimationFrame(tick);
-    };
-
-    size();
-    for (let i = 0; i < 8; i++) load(i);
-    let warm = 0;
-    const idle = () => {
-      if (warm >= GLOW_COUNT) return;
-      load(warm);
-      warm += 1;
-      if (warm < GLOW_COUNT) window.setTimeout(idle, 20);
-    };
-    const warmId = window.setTimeout(idle, 80);
-    raf = requestAnimationFrame(tick);
-    window.addEventListener("resize", size);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.clearTimeout(warmId);
-      window.removeEventListener("resize", size);
-    };
-  }, []);
-
+export function TwinkleStars({ gather = false }: { gather?: boolean }) {
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[34vh]">
-      <canvas ref={canvas} aria-hidden className="absolute inset-0 h-full w-full" />
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#07070b] to-transparent" />
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[40vh]" aria-hidden>
+      <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#07070b] to-transparent" />
+
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
+        {LINKS.map(([a, b], i) => {
+          const from = NODES[a];
+          const to = NODES[b];
+          const x1 = gather ? 50 : from.x;
+          const y1 = gather ? 78 : from.y;
+          const x2 = gather ? 50 : to.x;
+          const y2 = gather ? 92 : to.y;
+          return (
+            <line
+              key={i}
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="rgba(196,181,253,0.45)"
+              strokeWidth="0.28"
+              className="transition-all duration-700 ease-out"
+            />
+          );
+        })}
+        {NODES.map((n, i) => (
+          <circle
+            key={i}
+            cx={gather ? 50 : n.x}
+            cy={gather ? 62 + (i % 6) * 5 : n.y}
+            r={gather ? Math.max(1.2, n.r * 0.7) : n.r}
+            fill="rgba(221,214,254,0.95)"
+            className={`origin-center ${gather ? "transition-all duration-700 ease-out" : "animate-pulseGlow"}`}
+            style={{ transitionDelay: gather ? `${i * 35}ms` : undefined }}
+          />
+        ))}
+      </svg>
+
+      {DUST.map((p, i) => (
+        <span
+          key={i}
+          className={`absolute rounded-full bg-violet-100 shadow-[0_0_10px_rgba(196,181,253,0.85)] transition-all duration-700 ease-out ${
+            gather ? "" : "animate-twinkle animate-drift"
+          }`}
+          style={{
+            width: p.s,
+            height: p.s,
+            left: gather ? "50%" : `${p.x}%`,
+            top: gather ? `${p.lane}%` : `${p.y}%`,
+            opacity: gather ? 0.9 : 0.7,
+            transform: gather ? "translate(-50%, 0)" : undefined,
+            animationDelay: p.delay,
+            transitionDelay: `${i * 12}ms`,
+          }}
+        />
+      ))}
+
+      <span
+        className={`absolute left-1/2 -translate-x-1/2 transition-all duration-700 ease-out ${
+          gather ? "bottom-3 animate-bounce" : "bottom-[22%] animate-pulse"
+        }`}
+      >
+        <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+          <path
+            d="M32 4 L38 24 L58 24 L42 36 L48 56 L32 44 L16 56 L22 36 L6 24 L26 24 Z"
+            stroke="#c4b5fd"
+            strokeWidth="2"
+            fill="rgba(167,139,250,0.55)"
+          />
+        </svg>
+      </span>
     </div>
   );
 }

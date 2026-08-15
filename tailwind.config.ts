@@ -42,6 +42,25 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        twinkle: {
+          "0%, 100%": { opacity: "0.2" },
+          "50%": { opacity: "1" },
+        },
+        drift: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        pulseGlow: {
+          "0%, 100%": { opacity: "0.45", transform: "scale(1)" },
+          "50%": { opacity: "1", transform: "scale(1.18)" },
+        },
+      },
+      animation: {
+        twinkle: "twinkle 2.8s ease-in-out infinite",
+        drift: "drift 7s ease-in-out infinite",
+        pulseGlow: "pulseGlow 2.4s ease-in-out infinite",
+      },
     },
   },
   plugins: [tailwindcssAnimate],
