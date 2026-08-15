@@ -1,11 +1,17 @@
 "use client";
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { ArrowUp, Loader2 } from "lucide-react";
-import { GuideStar } from "@/components/astral/guide-star";
-import { TwinkleStars } from "@/components/astral/twinkle-stars";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
+
+const starters = [
+  "Teach me something new",
+  "Help me write this",
+  "Debug this code",
+  "Make a simple plan",
+];
 
 export function ForgeChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -128,22 +134,49 @@ export function ForgeChat() {
   const empty = messages.length === 0;
 
   return (
-    <section
-      id="chat"
-      className="relative flex h-[100svh] max-h-[100svh] items-center justify-center overflow-hidden bg-[#07070b] px-5 pt-16"
-    >
-      <TwinkleStars gather={unlocked} />
+    <section id="chat" className="relative flex h-[100svh] max-h-[100svh] flex-col bg-[#0a0a0b]">
+      <header className="flex h-14 shrink-0 items-center justify-between px-4 md:px-6">
+        <div className="flex items-center gap-2.5">
+          <span className="text-sm tracking-[0.14em] text-white">Astral</span>
+          <span className="rounded-full border border-white/15 px-2 py-0.5 text-[11px] text-white/45">
+            Free
+          </span>
+        </div>
+        <div className="flex items-center gap-5 text-sm text-white/50">
+          <button
+            type="button"
+            onClick={explore}
+            className="cursor-pointer transition-colors duration-200 hover:text-white"
+          >
+            Explore
+          </button>
+          <Link href="/plans" className="transition-colors duration-200 hover:text-white">
+            Plans
+          </Link>
+        </div>
+      </header>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center">
+      <div ref={scroller} className="min-h-0 flex-1 overflow-y-auto px-4">
         {empty ? (
-          <div className="mb-8 text-center">
-            <h1 className="font-[family-name:var(--font-story)] text-5xl font-light tracking-tight text-white md:text-6xl">
-              Astral
+          <div className="flex h-full flex-col items-center justify-center">
+            <h1 className="text-center text-3xl font-normal tracking-tight text-white md:text-4xl">
+              What can I help with?
             </h1>
-            <p className="mt-3 text-base text-white/50">What are you looking for?</p>
+            <div className="mt-8 flex w-full max-w-[680px] flex-wrap justify-center gap-2">
+              {starters.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => void send(s)}
+                  className="cursor-pointer rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition-colors duration-200 hover:bg-white/5 hover:text-white"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
           </div>
         ) : (
-          <div ref={scroller} className="mb-6 max-h-[36vh] w-full space-y-5 overflow-y-auto">
+          <div className="mx-auto w-full max-w-[680px] space-y-6 py-8">
             {messages.map((m, i) => (
               <article
                 key={`${m.role}-${i}`}
@@ -153,7 +186,7 @@ export function ForgeChat() {
                   className={`max-w-[92%] whitespace-pre-wrap text-[15px] leading-7 ${
                     m.role === "user"
                       ? "rounded-3xl bg-white/[0.08] px-4 py-3 text-white"
-                      : "text-white/80"
+                      : "text-white/85"
                   }`}
                 >
                   {m.role === "assistant" && !m.content && busy ? (
@@ -169,42 +202,36 @@ export function ForgeChat() {
             ))}
           </div>
         )}
+      </div>
 
-        <div className="flex w-full items-center gap-3">
-          <form onSubmit={onSubmit} className="relative min-w-0 flex-1">
-            <label htmlFor="astral-input" className="sr-only">
-              Message Astral
-            </label>
-            <textarea
-              id="astral-input"
-              ref={field}
-              rows={1}
-              value={input}
-              disabled={busy}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={onKey}
-              placeholder="Message Astral"
-              className="h-14 w-full resize-none rounded-full border border-white/20 bg-white/[0.05] py-3.5 pl-6 pr-14 text-base leading-none text-white outline-none placeholder:text-white/40 focus:border-white/40 focus:ring-2 focus:ring-white/20 disabled:opacity-60"
-            />
-            <button
-              type="submit"
-              disabled={busy || !input.trim()}
-              aria-label="Send message"
-              className="absolute top-1.5 right-1.5 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white text-black transition-opacity duration-200 hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowUp className="h-4 w-4" />}
-            </button>
-          </form>
+      <div className="shrink-0 px-4 pb-5 pt-2">
+        <form onSubmit={onSubmit} className="relative mx-auto w-full max-w-[680px]">
+          <label htmlFor="astral-input" className="sr-only">
+            Message Astral
+          </label>
+          <textarea
+            id="astral-input"
+            ref={field}
+            rows={1}
+            value={input}
+            disabled={busy}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={onKey}
+            placeholder="Message Astral"
+            className="h-14 w-full resize-none rounded-3xl border border-white/15 bg-white/[0.05] py-4 pl-5 pr-14 text-base text-white outline-none placeholder:text-white/40 focus:border-white/30 focus:ring-2 focus:ring-white/15 disabled:opacity-60"
+          />
           <button
-            type="button"
-            onClick={explore}
-            className="inline-flex h-14 shrink-0 cursor-pointer items-center gap-2 rounded-full border border-violet-200/40 px-6 text-sm tracking-[0.18em] text-violet-100 transition-colors duration-200 hover:border-violet-100/70 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white"
+            type="submit"
+            disabled={busy || !input.trim()}
+            aria-label="Send message"
+            className="absolute top-1.5 right-1.5 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white text-black transition-opacity duration-200 hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white disabled:cursor-not-allowed disabled:opacity-30"
           >
-            Explore
-            <GuideStar className="h-3.5 w-3.5" />
+            {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowUp className="h-4 w-4" />}
           </button>
-        </div>
-        <p className="mt-4 text-center text-[11px] text-white/28">{error || mode}</p>
+        </form>
+        <p className="mx-auto mt-3 max-w-[680px] text-center text-[11px] text-white/28">
+          {error || mode || "Free plan · Paid plans next"}
+        </p>
       </div>
     </section>
   );
