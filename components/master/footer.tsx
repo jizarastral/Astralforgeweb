@@ -22,7 +22,7 @@ export function MasterFooter() {
               <Link href="/#chat" className="hover:text-foreground">Chat</Link>
             </li>
             <li>
-              <Link href="/#chat" className="hover:text-foreground">Explore</Link>
+              <Link href="/#hole" className="hover:text-foreground">Explore</Link>
             </li>
             <li>
               <Link href="/what-we-do" className="hover:text-foreground">Forge</Link>

@@ -2,7 +2,6 @@
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { ArrowUp, Loader2 } from "lucide-react";
-import { ExploreFilm } from "@/components/astral/explore-film";
 import { TwinkleStars } from "@/components/astral/twinkle-stars";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -13,7 +12,7 @@ export function ForgeChat() {
   const [busy, setBusy] = useState(false);
   const [mode, setMode] = useState("");
   const [error, setError] = useState("");
-  const [film, setFilm] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
   const scroller = useRef<HTMLDivElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
 
@@ -38,15 +37,27 @@ export function ForgeChat() {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.style.overflow = "hidden";
+    root.style.overflow = unlocked ? "" : "hidden";
     return () => {
       root.style.overflow = "";
     };
-  }, []);
+  }, [unlocked]);
 
   function explore() {
-    if (film) return;
-    setFilm(true);
+    document.documentElement.style.overflow = "";
+    if (unlocked) {
+      document.getElementById("hole")?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    setUnlocked(true);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const hole = document.getElementById("hole");
+        if (!hole) return;
+        const top = hole.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: Math.max(0, top + 12), behavior: "smooth" });
+      });
+    });
   }
 
   async function send(text: string) {
@@ -133,7 +144,6 @@ export function ForgeChat() {
       className="relative flex h-[100svh] max-h-[100svh] items-center justify-center overflow-hidden bg-[#07070b] px-5 pt-16"
     >
       <TwinkleStars />
-      {film ? <ExploreFilm onClose={() => setFilm(false)} /> : null}
 
       <div className="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center">
         {empty ? (
