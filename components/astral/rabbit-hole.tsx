@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { GuideStar } from "@/components/astral/guide-star";
 import { REEL_COUNT, reelSrc } from "@/lib/explore-reel";
 
 function clamp(n: number, a = 0, b = 1) {
@@ -37,6 +38,7 @@ export function RabbitHole() {
   const pending = useRef<Set<number>>(new Set());
   const indexRef = useRef(0);
   const [end, setEnd] = useState(false);
+  const [lead, setLead] = useState(58);
 
   useEffect(() => {
     const load = (i: number) => {
@@ -93,6 +95,7 @@ export function RabbitHole() {
       const next = Math.min(REEL_COUNT - 1, Math.round(progress * (REEL_COUNT - 1)));
       indexRef.current = next;
       setEnd(progress > 0.92);
+      setLead(56 + progress * 10);
       around(next);
       paint(next);
     };
@@ -133,6 +136,14 @@ export function RabbitHole() {
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-black">
         <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-hidden />
+        {!end ? (
+          <span
+            className="pointer-events-none absolute left-1/2 z-20 -translate-x-1/2 drop-shadow-[0_0_18px_rgba(125,211,252,0.8)]"
+            style={{ top: `${lead}%` }}
+          >
+            <GuideStar />
+          </span>
+        ) : null}
         {end ? (
           <div className="absolute inset-x-0 bottom-10 z-10 flex justify-center gap-3">
             <Link

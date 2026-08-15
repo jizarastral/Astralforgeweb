@@ -2,6 +2,7 @@
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { ArrowUp, Loader2 } from "lucide-react";
+import { GuideStar } from "@/components/astral/guide-star";
 import { TwinkleStars } from "@/components/astral/twinkle-stars";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -13,6 +14,9 @@ export function ForgeChat() {
   const [mode, setMode] = useState("");
   const [error, setError] = useState("");
   const [unlocked, setUnlocked] = useState(false);
+  const [dim, setDim] = useState(false);
+  const [starY, setStarY] = useState<number | null>(null);
+  const leaving = useRef(false);
   const scroller = useRef<HTMLDivElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
 
@@ -44,8 +48,39 @@ export function ForgeChat() {
   }, [unlocked]);
 
   function explore() {
-    document.documentElement.style.overflow = "";
-    setUnlocked(true);
+    if (leaving.current) return;
+    leaving.current = true;
+    setDim(true);
+
+    window.setTimeout(() => {
+      setStarY(window.innerHeight * 0.62);
+      document.documentElement.style.overflow = "";
+      setUnlocked(true);
+
+      const hole = document.getElementById("hole");
+      const startY = window.innerHeight * 0.62;
+      const endY = window.innerHeight + 36;
+      const startScroll = window.scrollY;
+      const endScroll = hole
+        ? hole.getBoundingClientRect().top + window.scrollY + 12
+        : startScroll + window.innerHeight;
+      const duration = 1700;
+      const t0 = performance.now();
+
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - t0) / duration);
+        const ease = t * t * (1.15 - 0.15 * t);
+        setStarY(startY + (endY - startY) * ease);
+        window.scrollTo(0, startScroll + (endScroll - startScroll) * ease);
+        if (t < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          setStarY(null);
+          setDim(false);
+        }
+      };
+      requestAnimationFrame(tick);
+    }, 280);
   }
 
   async function send(text: string) {
@@ -132,14 +167,31 @@ export function ForgeChat() {
       className="relative flex h-[100svh] max-h-[100svh] items-center justify-center overflow-hidden bg-[#07070b] px-5 pt-16"
     >
       <TwinkleStars gather={unlocked} />
+      <div
+        className={`pointer-events-none absolute inset-0 z-[5] bg-black transition-opacity duration-300 ${
+          dim ? "opacity-45" : "opacity-0"
+        }`}
+      />
+      {starY !== null ? (
+        <span
+          className="pointer-events-none fixed left-1/2 z-[70] -translate-x-1/2 drop-shadow-[0_0_18px_rgba(125,211,252,0.85)]"
+          style={{ top: starY }}
+        >
+          <GuideStar />
+        </span>
+      ) : null}
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center">
+      <div
+        className={`relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center transition-opacity duration-500 ${
+          unlocked ? "opacity-40" : "opacity-100"
+        }`}
+      >
         {empty ? (
           <div className="mb-8 text-center">
             <h1 className="font-[family-name:var(--font-story)] text-5xl font-light tracking-tight text-white md:text-6xl">
               Astral
             </h1>
-            <p className="mt-3 text-base text-white/50">Ask anything.</p>
+            <p className="mt-3 text-base text-white/50">What are you looking for?</p>
           </div>
         ) : (
           <div ref={scroller} className="mb-6 max-h-[36vh] w-full space-y-5 overflow-y-auto">
@@ -169,38 +221,40 @@ export function ForgeChat() {
           </div>
         )}
 
-        <form onSubmit={onSubmit} className="relative w-full">
-          <label htmlFor="astral-input" className="sr-only">
-            Message Astral
-          </label>
-          <textarea
-            id="astral-input"
-            ref={field}
-            rows={1}
-            value={input}
-            disabled={busy}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={onKey}
-            placeholder="Message Astral"
-            className="min-h-14 w-full resize-none rounded-full border border-white/20 bg-white/[0.05] py-4 pl-6 pr-14 text-base text-white outline-none placeholder:text-white/40 focus:border-white/40 focus:ring-2 focus:ring-white/20 disabled:opacity-60"
-          />
+        <div className="flex w-full flex-col items-center gap-4 md:flex-row md:items-end">
+          <form onSubmit={onSubmit} className="relative w-full md:flex-1">
+            <label htmlFor="astral-input" className="sr-only">
+              Message Astral
+            </label>
+            <textarea
+              id="astral-input"
+              ref={field}
+              rows={1}
+              value={input}
+              disabled={busy}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={onKey}
+              placeholder="Message Astral"
+              className="min-h-14 w-full resize-none rounded-full border border-white/20 bg-white/[0.05] py-4 pl-6 pr-14 text-base text-white outline-none placeholder:text-white/40 focus:border-white/40 focus:ring-2 focus:ring-white/20 disabled:opacity-60"
+            />
+            <button
+              type="submit"
+              disabled={busy || !input.trim()}
+              aria-label="Send message"
+              className="absolute bottom-1.5 right-1.5 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white text-black transition-opacity duration-200 hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowUp className="h-4 w-4" />}
+            </button>
+          </form>
           <button
-            type="submit"
-            disabled={busy || !input.trim()}
-            aria-label="Send message"
-            className="absolute bottom-1.5 right-1.5 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white text-black transition-opacity duration-200 hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white disabled:cursor-not-allowed disabled:opacity-30"
+            type="button"
+            onClick={explore}
+            className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-2 rounded-full border border-violet-200/40 px-7 py-2 text-sm tracking-[0.2em] text-violet-100 transition-colors duration-200 hover:border-violet-100/70 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white"
           >
-            {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowUp className="h-4 w-4" />}
+            Explore
+            <GuideStar className="h-3.5 w-3.5" />
           </button>
-        </form>
-
-        <button
-          type="button"
-          onClick={explore}
-          className="mt-7 inline-flex min-h-11 cursor-pointer items-center rounded-full border border-white/30 px-8 py-2 text-sm tracking-[0.18em] text-white transition-colors duration-200 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white"
-        >
-          Explore
-        </button>
+        </div>
         <p className="mt-4 text-center text-[11px] text-white/28">{error || mode}</p>
       </div>
     </section>

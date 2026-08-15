@@ -1,5 +1,5 @@
-export const REEL_START = 16;
-export const REEL_COUNT = 90;
+export const REEL_START = 4;
+export const REEL_COUNT = 102;
 
 export function reelSrc(index: number) {
   const n = Math.max(0, Math.min(REEL_COUNT - 1, index));
