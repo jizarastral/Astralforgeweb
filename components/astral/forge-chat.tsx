@@ -14,9 +14,6 @@ export function ForgeChat() {
   const [mode, setMode] = useState("");
   const [error, setError] = useState("");
   const [unlocked, setUnlocked] = useState(false);
-  const [dim, setDim] = useState(false);
-  const [starY, setStarY] = useState<number | null>(null);
-  const leaving = useRef(false);
   const scroller = useRef<HTMLDivElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
 
@@ -48,39 +45,8 @@ export function ForgeChat() {
   }, [unlocked]);
 
   function explore() {
-    if (leaving.current) return;
-    leaving.current = true;
-    setDim(true);
-
-    window.setTimeout(() => {
-      setStarY(window.innerHeight * 0.62);
-      document.documentElement.style.overflow = "";
-      setUnlocked(true);
-
-      const hole = document.getElementById("hole");
-      const startY = window.innerHeight * 0.62;
-      const endY = window.innerHeight + 36;
-      const startScroll = window.scrollY;
-      const endScroll = hole
-        ? hole.getBoundingClientRect().top + window.scrollY + 12
-        : startScroll + window.innerHeight;
-      const duration = 1700;
-      const t0 = performance.now();
-
-      const tick = (now: number) => {
-        const t = Math.min(1, (now - t0) / duration);
-        const ease = t * t * (1.15 - 0.15 * t);
-        setStarY(startY + (endY - startY) * ease);
-        window.scrollTo(0, startScroll + (endScroll - startScroll) * ease);
-        if (t < 1) {
-          requestAnimationFrame(tick);
-        } else {
-          setStarY(null);
-          setDim(false);
-        }
-      };
-      requestAnimationFrame(tick);
-    }, 280);
+    document.documentElement.style.overflow = "";
+    setUnlocked(true);
   }
 
   async function send(text: string) {
@@ -166,20 +132,7 @@ export function ForgeChat() {
       id="chat"
       className="relative flex h-[100svh] max-h-[100svh] items-center justify-center overflow-hidden bg-[#07070b] px-5 pt-16"
     >
-      <TwinkleStars />
-      <div
-        className={`pointer-events-none absolute inset-0 z-[5] bg-black transition-opacity duration-300 ${
-          dim ? "opacity-45" : "opacity-0"
-        }`}
-      />
-      {starY !== null ? (
-        <span
-          className="pointer-events-none fixed left-1/2 z-[70] -translate-x-1/2 drop-shadow-[0_0_18px_rgba(125,211,252,0.85)]"
-          style={{ top: starY }}
-        >
-          <GuideStar />
-        </span>
-      ) : null}
+      <TwinkleStars gather={unlocked} />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center">
         {empty ? (
