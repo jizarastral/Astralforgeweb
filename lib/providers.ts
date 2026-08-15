@@ -4,7 +4,6 @@ import type { ChatMessage } from "@/lib/azure";
 
 export type ProviderId =
   | "azure"
-  | "nvidia"
   | "xai"
   | "anthropic"
   | "openrouter"
@@ -31,7 +30,6 @@ function sse(text: string) {
 export function listProviders(): ProviderInfo[] {
   return [
     { id: "azure", label: "Azure", ready: isAzureConfigured() },
-    { id: "nvidia", label: "NVIDIA", ready: Boolean(env("NVIDIA_API_KEY")) },
     { id: "xai", label: "xAI", ready: Boolean(env("XAI_API_KEY")) },
     { id: "anthropic", label: "Anthropic", ready: Boolean(env("ANTHROPIC_API_KEY")) },
     {
@@ -214,21 +212,6 @@ async function tryProvider(id: ProviderId, messages: ChatMessage[]) {
     });
   }
 
-  if (id === "nvidia") {
-    return streamOpenAICompat({
-      id,
-      url: "https://integrate.api.nvidia.com/v1/chat/completions",
-      headers: { Authorization: `Bearer ${env("NVIDIA_API_KEY")}` },
-      body: {
-        model: env("NVIDIA_MODEL") || "meta/llama-3.1-8b-instruct",
-        messages: packed,
-        temperature: 0.6,
-        stream: true,
-        max_tokens: 900,
-      },
-    });
-  }
-
   if (id === "xai") {
     return streamOpenAICompat({
       id,
@@ -334,7 +317,6 @@ async function tryProvider(id: ProviderId, messages: ChatMessage[]) {
 export async function streamWithFallback(messages: ChatMessage[]) {
   const order: ProviderId[] = [
     "azure",
-    "nvidia",
     "xai",
     "anthropic",
     "openrouter",

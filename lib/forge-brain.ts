@@ -25,7 +25,7 @@ If they ask what you can teach or do, list real teaching topics (code, math, wri
 const replies: Array<{ test: RegExp; text: string }> = [
   {
     test: /azure|endpoint|deployment|openai/i,
-    text: `Astral talks to the first live model that is configured: Azure, NVIDIA, xAI, Anthropic, OpenRouter, Groq, OpenAI, Gemini, then local Ollama.
+    text: `Astral talks to the first live model that is configured: Azure, xAI, Anthropic, OpenRouter, Groq, OpenAI, Gemini, then local Ollama.
 
 Add any of those keys to .env.local. If one quota dies, the next one answers.`,
   },

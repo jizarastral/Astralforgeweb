@@ -14,10 +14,6 @@ services:
         value: "22"
       - key: NODE_ENV
         value: production
-      - key: NVIDIA_API_KEY
-        sync: false
-      - key: NVIDIA_MODEL
-        value: meta/llama-3.1-8b-instruct
       - key: AZURE_OPENAI_ENDPOINT
         sync: false
       - key: AZURE_OPENAI_API_KEY
