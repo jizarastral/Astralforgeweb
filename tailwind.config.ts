@@ -55,11 +55,23 @@ const config: Config = {
           "0%, 100%": { opacity: "0.45", transform: "scale(1)" },
           "50%": { opacity: "1", transform: "scale(1.18)" },
         },
+        stream: {
+          "0%": { transform: "translateX(-6%) translateY(0)" },
+          "50%": { transform: "translateX(7%) translateY(-8px)" },
+          "100%": { transform: "translateX(-6%) translateY(0)" },
+        },
+        haze: {
+          "0%, 100%": { opacity: "0.35" },
+          "50%": { opacity: "0.65" },
+        },
       },
       animation: {
         twinkle: "twinkle 2.8s ease-in-out infinite",
         drift: "drift 7s ease-in-out infinite",
         pulseGlow: "pulseGlow 2.4s ease-in-out infinite",
+        stream: "stream 11s ease-in-out infinite",
+        "stream-slow": "stream 16s ease-in-out infinite",
+        haze: "haze 8s ease-in-out infinite",
       },
     },
   },

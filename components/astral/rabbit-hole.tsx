@@ -2,66 +2,137 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { GuideStar } from "@/components/astral/guide-star";
+import { REEL_COUNT, reelSrc } from "@/lib/explore-reel";
 
 function clamp(n: number, a = 0, b = 1) {
   return Math.min(b, Math.max(a, n));
 }
 
+function coverDraw(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  w: number,
+  h: number,
+) {
+  const ir = img.width / img.height;
+  const cr = w / h;
+  let dw = w;
+  let dh = h;
+  let dx = 0;
+  let dy = 0;
+  if (ir > cr) {
+    dw = h * ir;
+    dx = (w - dw) / 2;
+  } else {
+    dh = w / ir;
+    dy = (h - dh) / 2;
+  }
+  ctx.drawImage(img, dx, dy, dw, dh);
+}
+
 export function RabbitHole() {
   const track = useRef<HTMLElement>(null);
-  const video = useRef<HTMLVideoElement>(null);
+  const canvas = useRef<HTMLCanvasElement>(null);
+  const cache = useRef<Map<number, HTMLImageElement>>(new Map());
+  const pending = useRef<Set<number>>(new Set());
+  const indexRef = useRef(0);
   const [end, setEnd] = useState(false);
-  const duration = useRef(0);
+  const [lead, setLead] = useState(52);
 
   useEffect(() => {
-    const node = video.current;
-    if (!node) return;
-    const ready = () => {
-      duration.current = node.duration || 0;
+    const load = (i: number) => {
+      if (i < 0 || i >= REEL_COUNT) return;
+      if (cache.current.has(i) || pending.current.has(i)) return;
+      pending.current.add(i);
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        cache.current.set(i, img);
+        pending.current.delete(i);
+        if (i === indexRef.current) paint(i);
+      };
+      img.onerror = () => pending.current.delete(i);
+      img.src = reelSrc(i);
     };
-    if (node.readyState >= 1) ready();
-    node.addEventListener("loadedmetadata", ready);
+
+    const paint = (i: number) => {
+      const node = canvas.current;
+      if (!node) return;
+      const ctx = node.getContext("2d");
+      if (!ctx) return;
+      const img = cache.current.get(i) ?? cache.current.get(i - 1) ?? cache.current.get(i + 1);
+      if (!img) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (node.width !== Math.floor(w * dpr) || node.height !== Math.floor(h * dpr)) {
+        node.width = Math.floor(w * dpr);
+        node.height = Math.floor(h * dpr);
+        node.style.width = `${w}px`;
+        node.style.height = `${h}px`;
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, w, h);
+      coverDraw(ctx, img, w, h);
+    };
+
+    const around = (i: number) => {
+      load(i);
+      for (let k = 1; k <= 6; k++) {
+        load(i + k);
+        load(i - k);
+      }
+    };
 
     let raf = 0;
     const update = () => {
       const el = track.current;
-      if (!el || !node) return;
+      if (!el) return;
       const total = el.offsetHeight - window.innerHeight;
       const progress = total <= 1 ? 0 : clamp(-el.getBoundingClientRect().top / total);
-      setEnd(progress > 0.94);
-      const len = duration.current || node.duration || 0;
-      if (len > 0) {
-        const t = progress * (len - 0.04);
-        if (Math.abs(node.currentTime - t) > 0.02) node.currentTime = t;
-      }
+      const next = Math.min(REEL_COUNT - 1, Math.round(progress * (REEL_COUNT - 1)));
+      indexRef.current = next;
+      setEnd(progress > 0.93);
+      setLead(50 + progress * 14);
+      around(next);
+      paint(next);
     };
+
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(update);
     };
+
+    around(0);
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       cancelAnimationFrame(raf);
-      node.removeEventListener("loadedmetadata", ready);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
   }, []);
 
   return (
-    <section id="hole" ref={track} className="relative h-[420vh] bg-black">
+    <section
+      id="hole"
+      ref={track}
+      className="relative bg-black"
+      style={{ height: `${100 + REEL_COUNT * 3.2}vh` }}
+    >
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-black">
-        <video
-          ref={video}
-          className="absolute inset-0 h-full w-full object-cover"
-          src="/astral/flow/journey.mp4"
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden
-        />
+        <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-hidden />
+        {!end ? (
+          <span
+            className="pointer-events-none absolute left-1/2 z-20 -translate-x-1/2 drop-shadow-[0_0_18px_rgba(125,211,252,0.85)]"
+            style={{ top: `${lead}%` }}
+          >
+            <GuideStar />
+          </span>
+        ) : null}
         {end ? (
           <div className="absolute inset-x-0 bottom-10 z-10 flex justify-center gap-3">
             <Link
