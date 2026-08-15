@@ -6,8 +6,8 @@ services:
     runtime: node
     plan: free
     region: frankfurt
-    buildCommand: corepack enable && pnpm install && pnpm build
-    startCommand: pnpm start
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     healthCheckPath: /
     envVars:
       - key: NODE_VERSION
