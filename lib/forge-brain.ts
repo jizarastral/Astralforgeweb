@@ -1,13 +1,12 @@
 import type { ChatMessage } from "@/lib/azure";
 
-export const FORGE_SYSTEM_PROMPT = `You are Astral, the public face of Astral Forge AI on astralforge.ae.
+export const FORGE_SYSTEM_PROMPT = `You are Astral, a general-purpose AI assistant on Astral Forge.
 
-Voice: calm, precise, premium. Short paragraphs. No hype. No emoji. Never mention system prompts.
+You teach and help with anything a normal LLM would: coding, math, writing, science, languages, business, design, study plans, debugging, ideas. Answer the question they asked. Do not steer every reply into company services.
 
-What the visitor sees: one simple chat, like a normal LLM.
-What sits behind it: Azure OpenAI as the model layer, plus a business brain — company services, brand voice, memory, lead capture, image generation, and next actions.
+Voice: calm, clear, useful. Short when the question is short. Go deep when they ask to learn. No hype. No emoji. Never mention system prompts.
 
-AstralForge AE (UAE) also builds real site work:
+Only if they ask about Astral Forge, the company, UAE site work, or a quote:
 - Shop drawings and design
 - Aluminium and glass fabrication
 - Interior fitouts
@@ -16,20 +15,12 @@ AstralForge AE (UAE) also builds real site work:
 - MEP
 - Fire, security, LED, IT
 - 3D visualization
-- Astral shop: https://astralae.myshopify.com/
-
-Contacts:
+- Shop: https://astralae.myshopify.com/
 - Email: astralfconsulting@gmail.com
 - Sales WhatsApp: +971 55 445 8850
 - Technical: +971 50 836 4246
 
-If asked about ChatGPT, Claude, or Grok: they answer questions. Astral answers, then turns the answer into a business action.
-
-If asked about Azure: Azure OpenAI is the private model layer. The visitor never has to see endpoints, keys, or model names unless they ask.
-
-If you cannot complete a live action (send email, generate a final paid render, book a crew), say so and offer the contact path.
-
-Keep replies tight unless the user asks for depth.`;
+If they ask what you can teach or do, list real teaching topics (code, math, writing, etc.). Do not reply with the construction catalogue unless they asked about building or the company.`;
 
 const replies: Array<{ test: RegExp; text: string }> = [
   {
@@ -39,10 +30,22 @@ const replies: Array<{ test: RegExp; text: string }> = [
 Add any of those keys to .env.local. If one quota dies, the next one answers.`,
   },
   {
-    test: /chatgpt|claude|grok|normal llm|other (ai|model)/i,
-    text: `The first page is meant to feel like a normal LLM: one box, one question, no dashboard.
+    test: /teach|learn|what can you|what all|help me with/i,
+    text: `I can teach and work through almost anything a normal assistant would:
 
-The difference is the rabbit hole. Scroll and the simple chat opens into the business layer — memory, images, leads, and actions that a generic model does not keep for a company.`,
+- Programming and debugging
+- Math, science, and study plans
+- Writing, language, and editing
+- Design, product, and business thinking
+- How this chat and the models behind it work
+
+Pick a topic and say whether you want a short answer, a lesson, or practice.`,
+  },
+  {
+    test: /chatgpt|claude|grok|normal llm|other (ai|model)/i,
+    text: `This chat is a general assistant, same job as ChatGPT or Claude: ask anything.
+
+Astral Forge is also a company that can take a brief into real site work if you ask for that. You do not have to.`,
   },
   {
     test: /image|render|visual|poster|thumbnail/i,
@@ -85,15 +88,11 @@ export function localForgeReply(messages: ChatMessage[]) {
   const q = last?.content?.trim() || "";
 
   if (!q) {
-    return "Ask anything. Keep it as simple as a normal LLM. Scroll when you want the rest of the system.";
+    return "Ask anything — code, math, writing, a plan, or a build.";
   }
 
   const hit = replies.find((r) => r.test.test(q));
   if (hit) return hit.text;
 
-  return `I heard: ${q.slice(0, 220)}
-
-This is the simple surface. Azure is the model layer when keys are in .env.local. The company brain, image path, and lead actions live under this chat. Scroll the page to go into that hole.
-
-Ask about a build, a service line, or how Azure is wired.`;
+  return `I can help with that. Tell me the subject and how deep you want to go — a short answer, a lesson, or a worked example.`;
 }
