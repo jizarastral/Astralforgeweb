@@ -2,6 +2,7 @@
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { ArrowUp, Loader2 } from "lucide-react";
+import { ExploreFilm } from "@/components/astral/explore-film";
 import { TwinkleStars } from "@/components/astral/twinkle-stars";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -12,9 +13,7 @@ export function ForgeChat() {
   const [busy, setBusy] = useState(false);
   const [mode, setMode] = useState("");
   const [error, setError] = useState("");
-  const [unlocked, setUnlocked] = useState(false);
-  const [falling, setFalling] = useState(false);
-  const [star, setStar] = useState<{ x: number; y: number; trails: Array<{ x: number; y: number }> } | null>(null);
+  const [film, setFilm] = useState(false);
   const scroller = useRef<HTMLDivElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
 
@@ -39,50 +38,15 @@ export function ForgeChat() {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.style.overflow = unlocked ? "" : "hidden";
+    root.style.overflow = "hidden";
     return () => {
       root.style.overflow = "";
     };
-  }, [unlocked]);
+  }, []);
 
   function explore() {
-    if (falling || unlocked) return;
-    setFalling(true);
-    setUnlocked(true);
-
-    const html = document.documentElement;
-    const prevSmooth = html.style.scrollBehavior;
-    html.style.scrollBehavior = "auto";
-
-    const startX = window.innerWidth / 2;
-    const startY = window.innerHeight * 0.58;
-    const endY = window.innerHeight + 48;
-    const startScroll = window.scrollY;
-    const hole = document.getElementById("hole");
-    const endScroll = hole
-      ? hole.getBoundingClientRect().top + window.scrollY
-      : startScroll + window.innerHeight;
-    const duration = 2200;
-    const t0 = performance.now();
-    const trails: Array<{ x: number; y: number }> = [];
-
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - t0) / duration);
-      const ease = t * t * (1.2 - 0.2 * t);
-      const y = startY + (endY - startY) * ease;
-      const x = startX + Math.sin(t * Math.PI) * 18;
-      trails.unshift({ x, y });
-      if (trails.length > 10) trails.pop();
-      setStar({ x, y, trails: [...trails] });
-      window.scrollTo(0, startScroll + (endScroll - startScroll) * ease);
-      if (t < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        setStar(null);
-        html.style.scrollBehavior = prevSmooth;
-      }
-    };
-    requestAnimationFrame(tick);
+    if (film) return;
+    setFilm(true);
   }
 
   async function send(text: string) {
@@ -169,37 +133,7 @@ export function ForgeChat() {
       className="relative flex h-[100svh] max-h-[100svh] items-center justify-center overflow-hidden bg-[#07070b] px-5 pt-16"
     >
       <TwinkleStars />
-
-      {star ? (
-        <div className="pointer-events-none fixed inset-0 z-[80]" aria-hidden>
-          {star.trails.map((p, i) => (
-            <span
-              key={i}
-              className="absolute block h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-200"
-              style={{
-                left: p.x,
-                top: p.y,
-                opacity: Math.max(0, 0.35 - i * 0.03),
-                transform: `translate(-50%, -50%) scale(${1 - i * 0.07})`,
-                boxShadow: "0 0 10px rgba(196,181,253,0.55)",
-              }}
-            />
-          ))}
-          <span
-            className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: star.x, top: star.y }}
-          >
-            <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
-              <path
-                d="M32 4 L38 24 L58 24 L42 36 L48 56 L32 44 L16 56 L22 36 L6 24 L26 24 Z"
-                stroke="#ddd6fe"
-                strokeWidth="2.2"
-                fill="rgba(196,181,253,0.45)"
-              />
-            </svg>
-          </span>
-        </div>
-      ) : null}
+      {film ? <ExploreFilm onClose={() => setFilm(false)} /> : null}
 
       <div className="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center">
         {empty ? (
