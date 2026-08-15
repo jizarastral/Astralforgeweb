@@ -170,8 +170,8 @@ export function ForgeChat() {
           </div>
         )}
 
-        <div className="flex w-full flex-col items-center gap-4 md:flex-row md:items-end">
-          <form onSubmit={onSubmit} className="relative w-full md:flex-1">
+        <div className="flex w-full items-center gap-3">
+          <form onSubmit={onSubmit} className="relative min-w-0 flex-1">
             <label htmlFor="astral-input" className="sr-only">
               Message Astral
             </label>
@@ -184,13 +184,13 @@ export function ForgeChat() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKey}
               placeholder="Message Astral"
-              className="min-h-14 w-full resize-none rounded-full border border-white/20 bg-white/[0.05] py-4 pl-6 pr-14 text-base text-white outline-none placeholder:text-white/40 focus:border-white/40 focus:ring-2 focus:ring-white/20 disabled:opacity-60"
+              className="h-14 w-full resize-none rounded-full border border-white/20 bg-white/[0.05] py-3.5 pl-6 pr-14 text-base leading-none text-white outline-none placeholder:text-white/40 focus:border-white/40 focus:ring-2 focus:ring-white/20 disabled:opacity-60"
             />
             <button
               type="submit"
               disabled={busy || !input.trim()}
               aria-label="Send message"
-              className="absolute bottom-1.5 right-1.5 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white text-black transition-opacity duration-200 hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white disabled:cursor-not-allowed disabled:opacity-30"
+              className="absolute top-1.5 right-1.5 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white text-black transition-opacity duration-200 hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white disabled:cursor-not-allowed disabled:opacity-30"
             >
               {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowUp className="h-4 w-4" />}
             </button>
@@ -198,7 +198,7 @@ export function ForgeChat() {
           <button
             type="button"
             onClick={explore}
-            className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-2 rounded-full border border-violet-200/40 px-7 py-2 text-sm tracking-[0.2em] text-violet-100 transition-colors duration-200 hover:border-violet-100/70 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white"
+            className="inline-flex h-14 shrink-0 cursor-pointer items-center gap-2 rounded-full border border-violet-200/40 px-6 text-sm tracking-[0.18em] text-violet-100 transition-colors duration-200 hover:border-violet-100/70 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white"
           >
             Explore
             <GuideStar className="h-3.5 w-3.5" />
