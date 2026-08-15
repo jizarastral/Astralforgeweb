@@ -166,7 +166,7 @@ export function ForgeChat() {
       id="chat"
       className="relative flex h-[100svh] max-h-[100svh] items-center justify-center overflow-hidden bg-[#07070b] px-5 pt-16"
     >
-      <TwinkleStars gather={unlocked} />
+      <TwinkleStars />
       <div
         className={`pointer-events-none absolute inset-0 z-[5] bg-black transition-opacity duration-300 ${
           dim ? "opacity-45" : "opacity-0"
@@ -181,11 +181,7 @@ export function ForgeChat() {
         </span>
       ) : null}
 
-      <div
-        className={`relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center transition-opacity duration-500 ${
-          unlocked ? "opacity-40" : "opacity-100"
-        }`}
-      >
+      <div className="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center">
         {empty ? (
           <div className="mb-8 text-center">
             <h1 className="font-[family-name:var(--font-story)] text-5xl font-light tracking-tight text-white md:text-6xl">

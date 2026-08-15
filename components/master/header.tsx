@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -11,8 +12,10 @@ const links = [
 ];
 
 export function MasterHeader() {
+  const path = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  if (path === "/") return null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
