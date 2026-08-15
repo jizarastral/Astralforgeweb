@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -H 0.0.0.0",
+    "start": "node scripts/start-web.js",
     "lint": "next lint",
     "sync:shopify": "node -e \"fetch('https://astralae.myshopify.com/products.json?limit=50').then(r=>r.text()).then(t=>require('fs').writeFileSync('lib/shopify-products-raw.json',t)).then(()=>console.log('raw ok'))\""
   },
