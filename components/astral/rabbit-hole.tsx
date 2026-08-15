@@ -4,16 +4,11 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const beats = [
-  { id: "leave", src: "/astral/flow/01-leave.jpg", title: "", logo: false },
-  { id: "farm", src: "/astral/flow/02-farm.jpg", title: "", logo: false },
-  { id: "layers", src: "/astral/flow/03-layers.jpg", title: "", logo: false },
-  { id: "core", src: "/astral/flow/04-core.jpg", title: "", logo: false },
-  {
-    id: "mark",
-    src: "/astral/flow/05-mark.jpg",
-    title: "",
-    logo: false,
-  },
+  { id: "neurons", src: "/astral/flow/v-neurons.jpg" },
+  { id: "pipes", src: "/astral/flow/v-pipes.jpg" },
+  { id: "aisle", src: "/astral/flow/v-aisle.jpg" },
+  { id: "core", src: "/astral/flow/v-core.jpg" },
+  { id: "mark", src: "/astral/flow/v-mark.jpg" },
 ];
 
 function clamp(n: number, a = 0, b = 1) {
@@ -74,11 +69,7 @@ export function RabbitHole() {
                 pointerEvents: last && opacity > 0.6 ? "auto" : "none",
               }}
             >
-              <img
-                src={beat.src}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+              <img src={beat.src} alt="" className="absolute inset-0 h-full w-full object-cover" />
               {last ? (
                 <div className="absolute inset-x-0 bottom-10 z-10 flex justify-center gap-3">
                   <Link
