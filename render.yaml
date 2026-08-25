@@ -1,0 +1,18 @@
+# AstralForge NEW WEB — static site from Next export
+# Live: https://astralforgeweb-m4d7.onrender.com/
+services:
+  - type: web
+    name: astralforgeweb-m4d7
+    runtime: static
+    plan: free
+    staticPublishPath: out
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /_next/static/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /astral/*
+        name: Cache-Control
+        value: public, max-age=604800
